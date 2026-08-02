@@ -1,0 +1,181 @@
+/* =====================================================================
+   STIMULUS COLLECTIVE — Colors & Type Foundations
+   Swiss Alpine Travel Agency · "Travel that awakens the senses"
+   ---------------------------------------------------------------------
+   Fonts are loaded from Google Fonts as the nearest matches to the
+   brand manual (the original foundry fonts are not named in the PDF).
+   See README.md › VISUAL FOUNDATIONS for substitution notes.
+   ===================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Oswald:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* ---------------------------------------------------------------
+     PRIMARY PALETTE — "Paleta de Colores 1" (manual labels)
+     Warm, earthy, sun-faded alpine neutrals.
+     --------------------------------------------------------------- */
+  --copper:    #AC6D3E;   /* terracotta / copper — warm primary */
+  --camel:     #CD8D5D;   /* tan / camel — softer warm */
+  --sage:      #B6C08B;   /* sage green */
+  --celadon:   #D0D8AE;   /* light sage / celadon */
+  --white:     #FFFFFF;
+
+  /* ---------------------------------------------------------------
+     APPLIED / EXTENDED PALETTE — "Paleta de Colores 2"
+     The values actually used across the manual's layouts.
+     --------------------------------------------------------------- */
+  --bronze:    #836127;   /* the logo brown — deeper, used for the mark */
+  --ink:       #1A1714;   /* warm near-black — TEXT only, never a flat background */
+  --black:     #000000;
+  --alpine-blue: #3E6B88; /* lake / sky accent */
+
+  /* Warm dark SURFACES — replaces flat black. Deep espresso so lime/
+     magenta still pop without the page ever feeling "black." */
+  --espresso:      #3E2A1A;
+  --espresso-deep: #2C1D11;
+
+  /* Papers — warm off-whites the brand sets type & photos on */
+  --paper:        #FFF6E5;  /* warm cream — primary canvas */
+  --paper-cool:   #FAF6F5;  /* cool near-white — logo / clean layouts */
+  --paper-deep:   #F3E9D6;  /* deeper sand for panels */
+
+  /* ---------------------------------------------------------------
+     SIGNATURE ACCENT — Acid Lime / Chartreuse
+     The brand's one "loud" move: electric yellow-green over photos
+     and on display headlines. Use sparingly, with confidence.
+     --------------------------------------------------------------- */
+  --lime:      #EBFF1A;   /* acid lime — primary accent */
+  --lime-deep: #D9E600;   /* slightly knocked-back lime for text-on-light */
+  --gold:      #EECD06;   /* warm marigold (cover title variant) */
+
+  /* ---------------------------------------------------------------
+     SEMANTIC ROLES
+     --------------------------------------------------------------- */
+  --bg:           var(--paper);
+  --bg-alt:       var(--paper-cool);
+  --surface:      #FFFFFF;
+  --surface-dark: var(--espresso);     /* warm dark panels / sections */
+  --fg:           var(--ink);          /* primary text */
+  --fg-2:         #5C5247;             /* secondary text — warm taupe */
+  --fg-3:         #8A7E70;             /* tertiary / captions */
+  --fg-on-dark:   #F6F1E8;
+  --line:         #E4D9C4;             /* hairline on paper */
+  --line-strong:  #C9BBA0;
+
+  --brand:          var(--copper);
+  --brand-strong:   var(--bronze);
+  --accent:         var(--lime);
+  --focus:          var(--alpine-blue);
+
+  /* ---------------------------------------------------------------
+     TYPE FAMILIES  (editorial / cinematic direction)
+       Display  — Bodoni Moda (Didone): high-contrast cinematic caps
+                  + quiet-luxury italic for editorial moments
+       Sans     — Jost (geometric): body, UI, wordmark, eyebrows
+     --------------------------------------------------------------- */
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;
+  --font-serif:   'Oswald', 'Arial Narrow', sans-serif;
+  --font-sans:    'Jost', 'Futura', 'Century Gothic', sans-serif;
+
+  /* ---------------------------------------------------------------
+     TYPE SCALE (fluid, 1280px reference)
+     --------------------------------------------------------------- */
+  --t-hero:    clamp(3.5rem, 8vw, 7rem) /* @kind font */;
+  --t-d1:      clamp(2.75rem, 5.5vw, 4.5rem) /* @kind font */;
+  --t-d2:      clamp(2rem, 4vw, 3rem) /* @kind font */;
+  --t-h1:      2.25rem;   /* 36 */
+  --t-h2:      1.75rem;   /* 28 */
+  --t-h3:      1.25rem;   /* 20 */
+  --t-body-lg: 1.125rem;  /* 18 */
+  --t-body:    1rem;      /* 16 */
+  --t-small:   0.875rem;  /* 14 */
+  --t-eyebrow: 0.75rem;   /* 12 — letterspaced caps */
+
+  /* Tracking */
+  --track-eyebrow: 0.28em;
+  --track-wordmark: 0.34em;
+  --track-display: 0.01em;   /* slight positive tracking suits Didone caps */
+
+  /* ---------------------------------------------------------------
+     SPACING (8px base)
+     --------------------------------------------------------------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px;
+  --sp-9: 96px; --sp-10: 128px;
+
+  /* Radii — soft, generous; mirrors the rounded photo cards in the manual */
+  --r-xs: 4px; --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* Elevation — soft, warm-tinted, low-contrast (editorial, never harsh) */
+  --shadow-sm: 0 1px 2px rgba(60, 45, 25, 0.06);
+  --shadow-md: 0 8px 24px rgba(60, 45, 25, 0.08);
+  --shadow-lg: 0 20px 50px rgba(60, 45, 25, 0.12);
+
+  /* Motion — calm, editorial; long easing, no bounce */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1) /* @kind other */;
+  --dur: 360ms /* @kind other */;
+}
+
+/* =====================================================================
+   SEMANTIC ELEMENT STYLES — opt-in via .sc-prose / utility classes
+   ===================================================================== */
+
+.sc-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--t-eyebrow);
+  letter-spacing: var(--track-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.sc-wordmark {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: var(--track-wordmark);
+  text-transform: uppercase;
+}
+
+.sc-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: var(--track-display);
+  line-height: 0.98;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.sc-serif {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.sc-h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h1); line-height: 1.02; text-transform: uppercase; letter-spacing: 0.005em; }
+.sc-h2 { font-family: var(--font-display); font-weight: 700; font-size: var(--t-h2); line-height: 1.1; }
+.sc-h3 { font-family: var(--font-sans); font-weight: 600; font-size: var(--t-h3); letter-spacing: 0.01em; }
+
+.sc-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--t-body);
+  line-height: 1.65;
+  color: var(--fg-2);
+}
+
+.sc-lead {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: var(--t-body-lg);
+  line-height: 1.6;
+  color: var(--fg-2);
+}
+
+.sc-caption {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--t-small);
+  color: var(--fg-3);
+}
