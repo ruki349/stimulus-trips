@@ -13,14 +13,14 @@ function HomePage({ c, onNav }) {
     React.createElement(ThreeWays, { c }),
     React.createElement(JourneyGrid, { c, onNav }),
     React.createElement(Spotlight, { c }),
-    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Start a conversation", onClick: () => onNav("contact"), dark: true }));
+    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Start planning your journey", onClick: () => onNav("contact"), dark: true }));
 }
 
 function JourneysPage({ c, onNav }) {
   return React.createElement(React.Fragment, null,
     React.createElement(PageIntro, { eyebrow: c.journeysEyebrow, title: c.journeysTitle, lead: c.journeysLead }),
     JOURNEYS.map((j, i) => React.createElement(JourneyChapter, { key: j.id, journey: j, index: i, onNav })),
-    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Start a conversation", onClick: () => onNav("contact") }));
+    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Let's plan your journey", onClick: () => onNav("contact") }));
 }
 
 function AboutPage({ c, onNav }) {
@@ -34,7 +34,7 @@ function AboutPage({ c, onNav }) {
         React.createElement("h3", { className: "st-way-name" }, t),
         React.createElement("p", { className: "st-way-text" }, d)))))),
     React.createElement(MeaningBand, { c }),
-    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Start a conversation", onClick: () => onNav("contact"), dark: true }));
+    React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Start planning your journey", onClick: () => onNav("contact"), dark: true }));
 }
 
 function ContactPage({ c }) {

@@ -2,7 +2,7 @@ function lines(arr) { return arr.map((l, i) => React.createElement(React.Fragmen
 
 function Hero({ c, onNav }) {
   return React.createElement("section", { className: "st-hero" },
-    React.createElement("div", { className: "st-hero-photo" }, React.createElement("image-slot", { id: "hero-photo", shape: "rect", placeholder: "Full-bleed alpine landscape" })),
+    React.createElement("div", { className: "st-hero-photo" }, React.createElement("img", { src: "assets/hero-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
     React.createElement("div", { className: "st-hero-scrim" }),
     React.createElement("div", { className: "st-hero-inner" },
       React.createElement(Eyebrow, { className: "st-hero-eyebrow" }, c.heroEyebrow),
@@ -12,10 +12,9 @@ function Hero({ c, onNav }) {
 }
 
 function MeaningBand({ c }) {
-  const [pre, em, post] = c.moreQuote;
   return React.createElement("section", { className: "st-meaning" }, React.createElement("div", { className: "st-wrap" },
     React.createElement(Reveal, { className: "st-meaning-grid" },
-      React.createElement("blockquote", { className: "st-meaning-quote" }, pre, React.createElement("em", null, em), post),
+      React.createElement("blockquote", { className: "st-meaning-quote" }, c.moreQuote),
       React.createElement("div", { className: "st-meaning-body" }, React.createElement(Eyebrow, null, c.moreEyebrow), c.moreBody.map((p, i) => React.createElement("p", { key: i }, p))))));
 }
 
@@ -26,7 +25,7 @@ function ThreeWays({ c }) {
       React.createElement("div", { className: "st-way-icon" }, React.createElement(Icon, { name: w.icon, size: 26 })),
       React.createElement("span", { className: "st-way-num" }, w.num),
       React.createElement("h3", { className: "st-way-name" }, w.name),
-      React.createElement("p", { className: "st-way-text" }, w.text))))));
+      w.text && React.createElement("p", { className: "st-way-text" }, w.text))))));
 }
 
 function Spotlight({ c, flip = false }) {
@@ -36,7 +35,7 @@ function Spotlight({ c, flip = false }) {
         React.createElement(Eyebrow, null, c.placeEyebrow),
         React.createElement("h2", { className: "st-section-title" }, lines(c.placeTitle)),
         React.createElement("p", null, c.placeBody)),
-      React.createElement("div", { className: "st-spot-visual" }, React.createElement("image-slot", { id: "spotlight-photo", shape: "rect", placeholder: "A place worth experiencing" })))));
+      React.createElement("div", { className: "st-spot-visual" }, React.createElement("img", { src: "assets/spotlight-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })))));
 }
 
 function CTABand({ eyebrow, title, lead, cta, onClick, dark = false }) {
@@ -52,7 +51,7 @@ function JourneyGrid({ c, onNav }) {
     React.createElement("div", { className: "st-section-head" }, React.createElement(Eyebrow, null, c.journeysEyebrow), React.createElement("h2", { className: "st-section-title" }, lines(c.journeysTitle))),
     React.createElement("div", { className: "st-jgrid" }, JOURNEYS.map((j, i) => React.createElement(Reveal, { as: "article", key: j.id, className: "st-jcard" },
       React.createElement("div", { onClick: () => onNav("journeys") },
-        React.createElement("div", { className: "st-jcard-ph" }, React.createElement("image-slot", { id: `jcard-${j.id}`, shape: "rect", placeholder: j.title })),
+        React.createElement("div", { className: "st-jcard-ph" }, React.createElement("img", { src: ({explorer:"assets/jcard-explorer.png",boutique:"assets/jcard-boutique.jpg",signature:"assets/jcard-signature.png"})[j.id], alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
         React.createElement("div", { className: "st-jcard-body" }, React.createElement("h3", { className: "st-jcard-title" }, j.title), React.createElement("p", { className: "st-jcard-meta" }, j.mode)))))),
     React.createElement("div", { className: "st-jgrid-more" }, React.createElement(TextLink, { onClick: () => onNav("journeys") }, "View all journeys"))));
 }
@@ -61,14 +60,12 @@ function JourneyChapter({ journey, index, onNav }) {
   const flip = index % 2 === 1;
   return React.createElement("section", { className: `st-chapter ${flip ? "flip" : ""}` }, React.createElement("div", { className: "st-wrap" },
     React.createElement(Reveal, { className: "st-chapter-grid" },
-      React.createElement("div", { className: "st-chapter-visual" }, React.createElement("image-slot", { id: `chapter-${journey.id}`, shape: "rect", placeholder: journey.title })),
+      React.createElement("div", { className: "st-chapter-visual" }, React.createElement("img", { src: ({explorer:"assets/chapter-explorer.jpg",boutique:"assets/chapter-boutique.jpg",signature:"assets/chapter-signature.jpg"})[journey.id], alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
       React.createElement("div", { className: "st-chapter-body" },
         React.createElement(Eyebrow, null, journey.mode),
         React.createElement("h2", { className: "st-chapter-title" }, journey.title),
         React.createElement("p", { className: "st-chapter-lead" }, journey.lead),
         React.createElement("p", { className: "st-chapter-text" }, journey.body),
-        React.createElement("div", { className: "st-chapter-arc" }, journey.arc.map((p, i) => React.createElement(React.Fragment, { key: p }, React.createElement("span", null, p), i < journey.arc.length - 1 && React.createElement("i", null)))),
-        React.createElement("span", { className: "st-chapter-days" }, journey.days),
         React.createElement("div", null, React.createElement(TextLink, { onClick: () => onNav("contact") }, "Enquire about this journey"))))));
 }
 
