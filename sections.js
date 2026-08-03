@@ -2,7 +2,7 @@ function lines(arr) { return arr.map((l, i) => React.createElement(React.Fragmen
 
 function Hero({ c, onNav }) {
   return React.createElement("section", { className: "st-hero" },
-    React.createElement("div", { className: "st-hero-photo" }, React.createElement("img", { src: "hero-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
+    React.createElement("div", { className: "st-hero-photo" }, React.createElement("img", { src: "assets/hero-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
     React.createElement("div", { className: "st-hero-scrim" }),
     React.createElement("div", { className: "st-hero-inner" },
       React.createElement(Eyebrow, { className: "st-hero-eyebrow" }, c.heroEyebrow),
@@ -35,7 +35,7 @@ function Spotlight({ c, flip = false }) {
         React.createElement(Eyebrow, null, c.placeEyebrow),
         React.createElement("h2", { className: "st-section-title" }, lines(c.placeTitle)),
         React.createElement("p", null, c.placeBody)),
-      React.createElement("div", { className: "st-spot-visual" }, React.createElement("img", { src: "spotlight-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })))));
+      React.createElement("div", { className: "st-spot-visual" }, React.createElement("img", { src: "assets/spotlight-photo.jpg", alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })))));
 }
 
 function CTABand({ eyebrow, title, lead, cta, onClick, dark = false }) {
@@ -51,7 +51,7 @@ function JourneyGrid({ c, onNav }) {
     React.createElement("div", { className: "st-section-head" }, React.createElement(Eyebrow, null, c.journeysEyebrow), React.createElement("h2", { className: "st-section-title" }, lines(c.journeysTitle))),
     React.createElement("div", { className: "st-jgrid" }, JOURNEYS.map((j, i) => React.createElement(Reveal, { as: "article", key: j.id, className: "st-jcard" },
       React.createElement("div", { onClick: () => onNav("journeys") },
-        React.createElement("div", { className: "st-jcard-ph" }, React.createElement("img", { src: ({explorer:"jcard-explorer.png",boutique:"jcard-boutique.jpg",signature:"jcard-signature.png"})[j.id], alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
+        React.createElement("div", { className: "st-jcard-ph" }, React.createElement("img", { src: ({explorer:"assets/jcard-explorer.png",boutique:"assets/jcard-boutique.jpg",signature:"assets/jcard-signature.png"})[j.id], alt: "", style: { width: "100%", height: "100%", objectFit: "cover" } })),
         React.createElement("div", { className: "st-jcard-body" }, React.createElement("h3", { className: "st-jcard-title" }, j.title), React.createElement("p", { className: "st-jcard-meta" }, j.mode)))))),
     React.createElement("div", { className: "st-jgrid-more" }, React.createElement(TextLink, { onClick: () => onNav("journeys") }, "View all journeys"))));
 }
