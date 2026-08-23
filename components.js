@@ -1,4 +1,39 @@
 const { useState, useEffect, useRef } = React;
+/* Netlify Image CDN: WebP + resize on the fly. Originals stay untouched in assets/.
+   Off outside production so local/preview builds load the plain files. */
+const IMG_CDN = /(^|\.)stimulustrips\.com$|\.netlify\.app$/.test(location.hostname);
+function photo(src, w) {
+  if (!IMG_CDN || !src || !/^assets\//.test(src)) return src;
+  return "/.netlify/images?url=" + encodeURIComponent("/" + src) + "&w=" + w + "&q=82&fm=webp";
+}
+/* Responsive delivery. Masters stay untouched on disk; the CDN is the single
+   optimization layer (resize + WebP q82). No double compression. */
+const IMG_WIDTHS = [400, 640, 900, 1200, 1600, 2000];
+const IMG_DIMS = {
+  "assets/signature-hero.jpg": [2000, 1125], "assets/hero-photo.jpg": [1800, 1013],
+  "assets/chapter-explorer.jpg": [1350, 1800], "assets/chapter-boutique.jpg": [1280, 720],
+  "assets/chapter-signature.jpg": [1800, 1350], "assets/journeys-signature.jpg": [1300, 1625],
+  "assets/jov-boutique.jpg": [1400, 1750], "assets/spotlight-terrace.jpg": [1400, 1680],
+  "assets/jcard-explorer.jpg": [900, 745], "assets/jcard-boutique.jpg": [900, 745],
+  "assets/jcard-signature.jpg": [900, 745],
+  "assets/moment-basel-art.jpg": [1600, 1200], "assets/moment-engadin-light.jpg": [1400, 933],
+  "assets/moment-lake-boat.jpg": [1500, 1000], "assets/moment-makers-kitchen.jpg": [1600, 1200],
+  "assets/moment-oberalp.jpg": [1400, 933], "assets/moment-rhaetian-rail.jpg": [1400, 933],
+  "assets/moment-rhine-ebike.jpg": [1600, 1200]
+};
+function photoSet(src, maxW) {
+  if (!IMG_CDN || !src || !/^assets\//.test(src)) return undefined;
+  var dim = IMG_DIMS[src], cap = Math.min(maxW, dim ? dim[0] : maxW);
+  var ws = IMG_WIDTHS.filter(function (w) { return w <= cap; });
+  if (!ws.length || ws[ws.length - 1] !== cap) ws.push(cap);
+  return ws.map(function (w) { return photo(src, w) + " " + w + "w"; }).join(", ");
+}
+/* Spread onto an <img>: src + srcSet + sizes + intrinsic width/height + async decode. */
+function imgAttrs(src, maxW, sizes) {
+  var d = IMG_DIMS[src];
+  return { src: photo(src, maxW), srcSet: photoSet(src, maxW), sizes: sizes,
+           width: d ? d[0] : undefined, height: d ? d[1] : undefined, decoding: "async" };
+}
 function Icon({ name, size = 20, stroke = 1.6, style, className }) {
   const p = {
     arrow: React.createElement("path", { d: "M5 12h14M13 6l6 6-6 6" }),
@@ -21,8 +56,9 @@ function Eyebrow({ children, color, className = "", style }) {
 function Button({ children, variant = "primary", onClick, style }) {
   return React.createElement("button", { className: `st-btn st-btn-${variant}`, onClick, style }, children);
 }
-function TextLink({ children, onClick, style }) {
-  return React.createElement("a", { className: "st-tlink", onClick, style }, children);
+function TextLink({ children, onClick, href, style }) {
+  if (href) return React.createElement("a", { className: "st-tlink", href, onClick: e => { if (onClick) { e.preventDefault(); onClick(e); } }, style }, children);
+  return React.createElement("button", { type: "button", className: "st-tlink", onClick, style }, children);
 }
 function Reveal({ children, as = "div", className = "", style }) {
   const ref = useRef(null);
@@ -40,35 +76,41 @@ function Reveal({ children, as = "div", className = "", style }) {
 }
 function Nav({ onNav, current }) {
   const [open, setOpen] = useState(false);
-  const links = [["journeys", "Journeys"], ["about", "About"], ["contact", "Contact"]];
+  const links = [["journeys", "Journeys", "/journeys"], ["about", "About", "/about"], ["contact", "Contact", "/contact"]];
+  const go = (e, id) => { e.preventDefault(); onNav(id); setOpen(false); };
   return React.createElement("header", { className: "st-nav" },
-    React.createElement("a", { className: "st-nav-brand", onClick: () => onNav("home") },
-      React.createElement("img", { src: "assets/logo-mark.png", alt: "", className: "st-nav-mark" }),
+    React.createElement("a", { className: "st-nav-brand", href: "/", onClick: e => go(e, "home") },
+      React.createElement("img", { src: "assets/logo-mark.png", alt: "", className: "st-nav-mark", width: "28", height: "23" }),
       React.createElement("span", { className: "st-nav-word" }, "Stimulus\u00A0Trips")),
     React.createElement("nav", { className: `st-nav-links ${open ? "open" : ""}` },
-      links.map(([id, label]) => React.createElement("a", { key: id, className: current === id ? "active" : "", onClick: () => { onNav(id); setOpen(false); } }, label)),
-      React.createElement(Button, { variant: "lime", onClick: () => { onNav("contact"); setOpen(false); } }, "Plan a journey")),
-    React.createElement("button", { className: "st-nav-toggle", onClick: () => setOpen(o => !o), "aria-label": "Menu" },
+      links.map(([id, label, href]) => React.createElement("a", { key: id, href, className: current === id ? "active" : "", onClick: e => go(e, id) }, label)),
+      React.createElement(Button, { variant: "lime", onClick: () => { onNav("plan"); setOpen(false); } }, "Plan a journey")),
+    React.createElement("button", { className: "st-nav-toggle", onClick: () => setOpen(o => !o), "aria-label": open ? "Close menu" : "Open menu", "aria-expanded": open ? "true" : "false" },
       React.createElement(Icon, { name: open ? "close" : "menu" })));
 }
 function Footer({ onNav }) {
   return React.createElement("footer", { className: "st-footer" },
     React.createElement("div", { className: "st-footer-top" },
       React.createElement("div", { className: "st-footer-lockup" },
-        React.createElement("img", { src: "assets/logo-mark-white.png", alt: "Stimulus Trips" }),
-        React.createElement("span", { className: "st-nav-word" }, "Stimulus\u00A0Trips"),
-        React.createElement("p", { className: "st-footer-tag" }, "Travel that awakens the senses.")),
+        React.createElement("img", { src: "assets/logo-mark-white.png", alt: "", loading: "lazy" }),
+        React.createElement("span", { className: "st-nav-word" }, "Stimulus\u00A0Trips")),
       React.createElement("div", { className: "st-footer-cols" },
-        React.createElement("div", null, React.createElement(Eyebrow, null, "Studio"),
-          React.createElement("a", { onClick: () => onNav("journeys") }, "Journeys"),
-          React.createElement("a", { onClick: () => onNav("about") }, "About"),
-          React.createElement("a", { onClick: () => onNav("contact") }, "Contact")),
-        React.createElement("div", null, React.createElement(Eyebrow, null, "Find us"),
-          React.createElement("a", null, "Bahnhofstrasse, Z\u00FCrich"),
+        React.createElement("div", null, React.createElement(Eyebrow, null, "Explore"),
+          React.createElement("a", { href: "/journeys", onClick: e => { e.preventDefault(); onNav("journeys"); } }, "Journeys"),
+          React.createElement("a", { href: "/about", onClick: e => { e.preventDefault(); onNav("about"); } }, "About"),
+          React.createElement("a", { href: "/contact", onClick: e => { e.preventDefault(); onNav("contact"); } }, "Contact")),
+        React.createElement("div", null, React.createElement(Eyebrow, null, "Contact"),
+          React.createElement("a", { href: "mailto:" + EMAIL }, EMAIL),
           React.createElement("a", { href: waLink(), target: "_blank", rel: "noopener" }, "WhatsApp \u00B7 ", WHATSAPP.display)))),
     React.createElement("div", { className: "st-footer-base" },
       React.createElement("span", null, "\u00A9 2026 Stimulus Trips"),
       React.createElement("span", null, "Z\u00FCrich \u00B7 Switzerland")));
+}
+function scrollToChapter(id) {
+  const el = document.getElementById("chapter-" + id);
+  if (!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - 90;
+  window.scrollTo({ top: y, behavior: "smooth" });
 }
 const WHATSAPP = { number: "41762373374", display: "+41 76 237 33 74", message: "Hi Stimulus Trips, I'd like to plan a journey." };
 function waLink() { return `https://wa.me/${WHATSAPP.number}?text=${encodeURIComponent(WHATSAPP.message)}`; }
@@ -76,4 +118,4 @@ function WhatsAppFab() {
   return React.createElement("a", { className: "st-wa-fab", href: waLink(), target: "_blank", rel: "noopener", "aria-label": "Chat on WhatsApp" },
     React.createElement(Icon, { name: "whatsapp", size: 22, stroke: 1.7 }));
 }
-Object.assign(window, { Icon, Eyebrow, Button, TextLink, Reveal, Nav, Footer, WhatsAppFab, WHATSAPP, waLink });
+Object.assign(window, { Icon, Eyebrow, Button, TextLink, Reveal, Nav, Footer, WhatsAppFab, WHATSAPP, waLink, scrollToChapter, photo });

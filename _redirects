@@ -1,0 +1,6 @@
+# Canonical journey URLs (old nested paths -> new)
+/journeys/explorer    /explorer    301!
+/journeys/boutique    /boutique    301!
+/journeys/signature   /signature   301!
+# SPA fallback for anything without a static file
+/*                    /index.html  200

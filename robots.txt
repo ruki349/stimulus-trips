@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /preview-confirmation.html
+
+Sitemap: https://stimulustrips.com/sitemap.xml
