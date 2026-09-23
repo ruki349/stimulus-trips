@@ -1,13 +1,17 @@
-function ExHero({ d, onNav, journey }) {
-  return React.createElement("section", { className: "st-exhero" },
-    React.createElement("div", { className: "st-hero-photo" }, React.createElement("img", Object.assign(imgAttrs(d.photo, 2000, "100vw"), { alt: "", fetchpriority: "high", decoding: "sync", style: { width: "100%", height: "100%", objectFit: "cover" } }))),
+function ExHero({ d, onNav, journey, season }) {
+  const [noPhoto, setNoPhoto] = React.useState(false);
+  React.useEffect(() => setNoPhoto(false), [d.photo]);
+  return React.createElement("section", { className: "st-exhero" + (noPhoto ? " is-typographic" : "") + (d.align === "center" && !noPhoto ? " is-center" : "") },
+    !noPhoto && React.createElement("div", { className: "st-hero-photo" }, React.createElement("img", Object.assign(imgAttrs(d.photo, 2000, "100vw"), { alt: "", fetchpriority: "high", decoding: "sync", onError: () => setNoPhoto(true), style: { width: "100%", height: "100%", objectFit: "cover", objectPosition: d.photoPos || "50% 50%", "--pos-m": d.photoPosMobile || d.photoPos || "50% 50%" } }))),
     React.createElement("div", { className: "st-hero-scrim" }),
     React.createElement("div", { className: "st-exhero-inner" },
       React.createElement(Eyebrow, { className: "st-hero-eyebrow" }, d.eyebrow),
+      d.journey && React.createElement("p", { className: "st-exhero-journey" }, d.journey),
       React.createElement("h1", { className: "st-exhero-title" }, d.title),
       React.createElement("p", { className: "st-exhero-lead" }, d.lead),
+      d.lead2 && React.createElement("p", { className: "st-exhero-lead st-exhero-lead2" }, d.lead2),
       React.createElement("div", { className: "st-exhero-meta" }, d.meta.map(m => React.createElement("span", { key: m }, m))),
-      React.createElement("div", { className: "st-exhero-cta" }, React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey) }, d.cta)),
+      React.createElement("div", { className: "st-exhero-cta" }, React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, d.cta)),
       React.createElement("p", { className: "st-exhero-quote" }, d.quote)));
 }
 
@@ -22,7 +26,7 @@ function ExRoute({ d }) {
   return React.createElement("section", { className: "st-exroute" }, React.createElement("div", { className: "st-wrap" },
     React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 720 } },
       React.createElement(Eyebrow, null, d.eyebrow || "The route"),
-      React.createElement("h2", { className: "st-section-title" }, d.title)),
+      React.createElement("h2", { className: "st-section-title" }, lines(d.title))),
     React.createElement("div", { className: "st-exroute-grid" },
       React.createElement("div", { className: `st-exroute-map ${window.RouteMap && d.stops ? "has-map" : ""}` },
         window.RouteMap && d.stops ? React.createElement(RouteMap, { stops: d.stops, legs: d.legs }) : (d.mapNote || "Route map \u2014 visual to be added")),
@@ -34,16 +38,66 @@ function ExRoute({ d }) {
         React.createElement("p", { className: "st-exroute-note" }, d.note)))));
 }
 
-function ExMoments({ moments, heading }) {
-  return React.createElement("section", { className: "st-exmoments" }, React.createElement("div", { className: "st-wrap" },
+function ExMomentVisual({ m }) {
+  const [failed, setFailed] = React.useState(false);
+  React.useEffect(() => setFailed(false), [m.photo]);
+  return React.createElement("div", { className: "st-exmoment-visual" }, m.photo && !failed
+    ? React.createElement("img", Object.assign(imgAttrs(m.photo, 1400, "(max-width: 900px) 100vw, 50vw"), { alt: m.title, loading: "lazy", onError: () => setFailed(true), style: { width: "100%", height: "100%", objectFit: "cover" } }))
+    : React.createElement("span", { className: "st-moment-mark" }, m.num));
+}
+
+function ExStatement({ text }) {
+  return React.createElement("section", { className: "st-exstatement" }, React.createElement("div", { className: "st-wrap" },
+    React.createElement(Reveal, null, React.createElement("p", { className: "st-exstatement-line" }, text))));
+}
+
+function ExStages({ stages, heading }) {
+  return React.createElement("section", { className: "st-exstages" }, React.createElement("div", { className: "st-wrap" },
+    React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 720 } },
+      React.createElement(Eyebrow, null, "The journey"),
+      React.createElement("h2", { className: "st-section-title" }, heading || "The journey, stage by stage")),
+    React.createElement(Reveal, { className: "st-exstages-grid" }, stages.map(s => React.createElement("div", { key: s.place, className: "st-exstage" },
+      React.createElement("h3", { className: "st-exstage-place" }, s.place),
+      s.meta && React.createElement("p", { className: "st-exstage-meta" }, s.meta),
+      React.createElement("p", { className: "st-exstage-text" }, s.text))))));
+}
+
+function valueFromConversion(c) {
+  return { title: "The journey, taken care of.",
+    items: c.included.split(" \u00B7 "),
+    notIncluded: c.notIncluded.replace(/^Not included:\s*/i, ""),
+    price: { eyebrow: c.eyebrow, amount: c.amount, meta: c.duration, basis: c.basis, note: c.note, cta: c.cta } };
+}
+
+function ExValue({ d, onNav, journey, season }) {
+  const p = d.price || {};
+  return React.createElement("section", { className: "st-exvalue" }, React.createElement("div", { className: "st-wrap st-exvalue-grid" },
+    React.createElement(Reveal, { className: "st-exvalue-incl" },
+      React.createElement(Eyebrow, null, "What's included"),
+      React.createElement("h2", { className: "st-exvalue-title" }, d.title),
+      React.createElement("div", { className: "st-exvalue-list" }, d.items.map(it => React.createElement("p", { key: it, className: "st-exincl-item" }, it))),
+      React.createElement("p", { className: "st-exvalue-not" },
+        React.createElement("span", null, "Not included: "), d.notIncluded)),
+    React.createElement(Reveal, { className: "st-exvalue-price" },
+      React.createElement(Eyebrow, { style: { color: "var(--lime)" } }, p.eyebrow),
+      React.createElement("p", { className: "st-exvalue-amount" + (p.amount ? "" : " is-headline") }, p.amount || p.headline),
+      p.meta && React.createElement("p", { className: "st-exvalue-meta" }, p.meta),
+      p.basis && React.createElement("p", { className: "st-exvalue-note" }, p.basis),
+      p.note && React.createElement("p", { className: "st-exvalue-note" }, p.note),
+      React.createElement("p", { className: "st-exvalue-note" }, "Enquiring is free and commits you to nothing."),
+      React.createElement("div", { className: "st-exvalue-cta" },
+        React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, p.cta)))));
+}
+
+function ExMoments({ moments, heading, layout }) {
+  const stacked = layout === "stacked";
+  return React.createElement("section", { className: "st-exmoments" + (stacked ? " is-stacked" : "") }, React.createElement("div", { className: "st-wrap" },
     React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 720, marginBottom: 8 } },
       React.createElement(Eyebrow, null, "Signature moments"),
       React.createElement("h2", { className: "st-section-title" }, heading || "Four moments that define the journey")),
-    moments.map((m, i) => React.createElement("div", { key: m.num, className: `st-exmoment ${i % 2 === 1 ? "flip" : ""}` },
+    moments.map((m, i) => React.createElement("div", { key: m.num, className: `st-exmoment ${!stacked && i % 2 === 1 ? "flip" : ""}` },
       React.createElement(Reveal, { className: "st-exmoment-grid" },
-        React.createElement("div", { className: "st-exmoment-visual" }, m.photo
-          ? React.createElement("img", Object.assign(imgAttrs(m.photo, 1400, "(max-width: 900px) 100vw, 50vw"), { alt: m.title, loading: "lazy", style: { width: "100%", height: "100%", objectFit: "cover" } }))
-          : React.createElement("span", { className: "st-moment-mark" }, m.num)),
+        React.createElement(ExMomentVisual, { m }),
         React.createElement("div", { className: "st-exmoment-body" },
           React.createElement("span", { className: "st-exmoment-num" }, "Moment " + m.num),
           React.createElement("h3", { className: "st-exmoment-title" }, m.title),
@@ -63,15 +117,15 @@ function ExDays({ days, heading }) {
         React.createElement("p", { className: "st-exday-text" }, day.text)))))));
 }
 
-function ExShaped({ d }) {
+function ExShaped({ d, compact }) {
   return React.createElement("section", { className: "st-exshaped" }, React.createElement("div", { className: "st-wrap" },
     React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 720 } },
       React.createElement("h2", { className: "st-section-title" }, lines(d.title)),
       React.createElement("p", { className: "st-lead", style: { marginTop: 6 } }, d.lead)),
-    React.createElement("div", { className: "st-exshaped-list" }, d.items.map(([t, x]) => React.createElement("div", { key: t, className: "st-exshaped-row" },
+    React.createElement("div", { className: "st-exshaped-list" + (compact ? " is-compact" : "") }, d.items.map(([t, x]) => React.createElement("div", { key: t, className: "st-exshaped-row" },
       React.createElement("h3", null, t),
       React.createElement("p", null, x)))),
-    React.createElement("p", { className: "st-exshaped-closing" }, d.closing)));
+    React.createElement("p", { className: "st-exshaped-closing" }, d.closing || d.support)));
 }
 
 function ExIncluded({ d }) {
@@ -85,21 +139,23 @@ function ExIncluded({ d }) {
       React.createElement("p", null, d.notIncluded))));
 }
 
-function ExPrice({ d }) {
+function ExPrice({ d, onNav, journey, season }) {
   return React.createElement("section", { className: "st-chprice" }, React.createElement("div", { className: "st-wrap st-chprice-in" },
     React.createElement(Eyebrow, null, d.eyebrow),
-    React.createElement("p", { className: "st-chprice-amount" }, d.amount),
-    React.createElement("p", { className: "st-chprice-from" }, d.meta),
-    React.createElement("p", { className: "st-chprice-note" }, d.basis),
-    React.createElement("p", { className: "st-chprice-note" }, d.note)));
+    React.createElement("p", { className: "st-chprice-amount" + (d.amount ? "" : " is-headline") }, d.amount || d.headline),
+    d.meta && React.createElement("p", { className: "st-chprice-from" }, d.meta),
+    d.basis && React.createElement("p", { className: "st-chprice-note" }, d.basis),
+    d.note && React.createElement("p", { className: "st-chprice-note" }, d.note),
+    d.cta && onNav && React.createElement("div", { className: "st-chprice-cta" },
+      React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, d.cta))));
 }
 
-function ExFinal({ d, onNav, journey }) {
+function ExFinal({ d, onNav, journey, season }) {
   return React.createElement("section", { className: "st-exfinal" }, React.createElement("div", { className: "st-wrap st-exfinal-in" },
     React.createElement("h2", { className: "st-section-title" }, d.title),
     React.createElement("p", { className: "st-lead" }, d.body),
-    React.createElement(Button, { variant: "primary", onClick: () => onNav("plan", journey) }, d.cta),
-    React.createElement("p", { className: "st-exfinal-support" }, d.support)));
+    React.createElement(Button, { variant: "primary", onClick: () => onNav("plan", journey, season) }, d.cta),
+    d.support && React.createElement("p", { className: "st-exfinal-support" }, d.support)));
 }
 function ExJourneyMap({ d }) {
   return React.createElement("section", { className: "st-exjourney" }, React.createElement("div", { className: "st-wrap" },
@@ -164,4 +220,4 @@ function ExConversion({ d, onNav, journey }) {
     React.createElement("p", { className: "st-exconv-not" }, d.notIncluded)));
 }
 
-Object.assign(window, { ExHero, ExIdea, ExRoute, ExMoments, ExDays, ExShaped, ExIncluded, ExPrice, ExFinal, ExJourneyMap, ExMomentsCompact, ExShapedCompact, ExConversion });
+Object.assign(window, { ExHero, ExMomentVisual, ExStatement, ExStages, ExValue, valueFromConversion, ExIdea, ExRoute, ExMoments, ExDays, ExShaped, ExIncluded, ExPrice, ExFinal, ExJourneyMap, ExMomentsCompact, ExShapedCompact, ExConversion });

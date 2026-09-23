@@ -15,28 +15,29 @@ function HomePage({ c, onNav }) {
     React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Plan a journey \u2192", onClick: () => onNav("plan"), dark: true }));
 }
 
-function PlanPage({ c, journey }) {
-  const [sent, setSent] = React.useState(PREVIEW_THANKS);
+function PlanPage({ c, journey, season }) {
+  const [sent, setSent] = React.useState(false);
   return React.createElement(React.Fragment, null,
     !sent && React.createElement(PageIntro, { eyebrow: c.planEyebrow, title: c.planTitle, lead: c.planLead }),
     !sent && React.createElement(PlanSteps, null),
-    React.createElement(PlanForm, { journey, sent, onSent: () => setSent(true) }));
+    React.createElement(PlanForm, { journey, season, sent, onSent: () => setSent(true) }));
 }
 
-function JourneysIntro({ c }) {
-  return React.createElement("section", { style: { padding: "clamp(56px,8vw,96px) 0 0" } }, React.createElement("div", { className: "st-wrap" },
+function JourneysIntro({ c, season, onSeason }) {
+  const s = SEASONS.find(x => x.id === season) || SEASONS[0];
+  return React.createElement("section", { className: "st-jintro" }, React.createElement("div", { className: "st-wrap st-jintro-in" },
     React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 820 } },
       React.createElement(Eyebrow, null, "Curated journeys"),
-      React.createElement("h1", { className: "st-section-title" }, c.journeysHeroTitle),
-      React.createElement("p", { className: "st-principle" }, c.journeysPrinciple))));
+      React.createElement("h1", { className: "st-section-title" }, s.title),
+      React.createElement("p", { className: "st-lead", style: { maxWidth: 620 } }, s.lead),
+      React.createElement("p", { className: "st-principle" }, c.journeysPrinciple)),
+    React.createElement(SeasonSwitch, { season, onSeason })));
 }
 
-function JourneysPage({ c, onNav }) {
+function JourneysPage({ c, onNav, season = "summer", onSeason }) {
   return React.createElement(React.Fragment, null,
-    React.createElement(JourneysIntro, { c }),
-    React.createElement(JourneyOverview, { journeys: JOURNEY_OVERVIEW, onNav }),
-    React.createElement(JourneyFit, { c, onNav }),
-    React.createElement(FlexLine, { c }),
+    React.createElement(JourneysIntro, { c, season, onSeason }),
+    React.createElement(JourneyCompare, { season, onNav }),
     React.createElement(EscapeBand, { c, onNav }));
 }
 
@@ -106,39 +107,47 @@ function ContactPage({ c, onNav }) {
     React.createElement(PageIntro, { eyebrow: c.contactEyebrow, title: c.contactTitle }),
     React.createElement(ContactChannels, { onNav }));
 }
-function ExplorerPage({ onNav }) {
-  const d = EXPLORER;
+function ExplorerPage({ onNav, season }) {
+  const winter = season === "winter";
+  const d = winter ? EXPLORER_CONTENT.winter : EXPLORER_CONTENT.summer;
+  const value = winter ? Object.assign({}, d.included, { price: d.price }) : valueFromConversion(d.conversion);
   return React.createElement(React.Fragment, null,
-    React.createElement(ExHero, { d: d.hero, onNav, journey: "explorer" }),
-    React.createElement(ExJourneyMap, { d: d.journey }),
-    React.createElement(ExMomentsCompact, { moments: d.moments }),
-    React.createElement(ExShapedCompact, { d: d.shaped }),
-    React.createElement(ExConversion, { d: d.conversion, onNav, journey: "explorer" }));
+    React.createElement(ExHero, { d: d.hero, onNav, journey: "explorer", season }),
+    React.createElement(ExRoute, { d: winter ? d.route : d.journey }),
+    React.createElement(ExStages, { stages: d.stages }),
+    React.createElement(ExShaped, { d: d.shaped, compact: true }),
+    React.createElement(ExValue, { d: value, onNav, journey: "explorer", season }),
+    React.createElement(ExFinal, { d: d.final, onNav, journey: "explorer", season }));
 }
 
-function BoutiquePage({ onNav }) {
-  const d = BOUTIQUE;
+function BoutiquePage({ onNav, season }) {
+  const winter = season === "winter";
+  const d = winter ? BOUTIQUE_CONTENT.winter : BOUTIQUE_CONTENT.summer;
+  const value = winter ? Object.assign({}, d.included, { price: d.price }) : valueFromConversion(d.conversion);
   return React.createElement(React.Fragment, null,
-    React.createElement(ExHero, { d: d.hero, onNav, journey: "boutique" }),
-    React.createElement(ExJourneyMap, { d: d.journey }),
-    React.createElement(ExMomentsCompact, { moments: d.moments }),
-    React.createElement(ExShapedCompact, { d: d.shaped }),
-    React.createElement(ExConversion, { d: d.conversion, onNav, journey: "boutique" }));
+    React.createElement(ExHero, { d: d.hero, onNav, journey: "boutique", season }),
+    React.createElement(ExRoute, { d: winter ? d.route : d.journey }),
+    React.createElement(ExStages, { stages: d.stages }),
+    React.createElement(ExShaped, { d: d.shaped, compact: true }),
+    React.createElement(ExValue, { d: value, onNav, journey: "boutique", season }),
+    React.createElement(ExFinal, { d: d.final, onNav, journey: "boutique", season }));
 }
 
-function SignaturePage({ onNav }) {
+function SignaturePage({ onNav, season }) {
   const d = SIGNATURE;
+  const winter = season === "winter";
+  const hero = Object.assign({}, d.hero, { eyebrow: winter ? "Winter" : "Summer", photo: winter ? "assets/winter-signature-hero.jpg" : d.hero.photo, photoPos: winter ? undefined : d.hero.photoPos });
   return React.createElement(React.Fragment, null,
-    React.createElement(ExHero, { d: d.hero, onNav, journey: "signature" }),
-    React.createElement(ExIdea, { d: d.idea }),
+    React.createElement(ExHero, { d: hero, onNav, journey: "signature", season }),
     React.createElement(SigSteps, { d: d.steps }),
-    React.createElement(ExShapedCompact, { d: d.shaped }),
-    React.createElement(ExConversion, { d: d.conversion, onNav, journey: "signature" }));
+    React.createElement(ExShaped, { d: d.shaped, compact: true }),
+    React.createElement(ExPrice, { d: d.pricing, onNav, journey: "signature", season }),
+    React.createElement(ExFinal, { d: d.final, onNav, journey: "signature", season }));
 }
 
-function ChapterPage({ id, onNav }) {
-  if (id === "boutique") return React.createElement(BoutiquePage, { onNav });
-  if (id === "signature") return React.createElement(SignaturePage, { onNav });
-  return React.createElement(ExplorerPage, { onNav });
+function ChapterPage({ id, onNav, season }) {
+  if (id === "boutique") return React.createElement(BoutiquePage, { onNav, season });
+  if (id === "signature") return React.createElement(SignaturePage, { onNav, season });
+  return React.createElement(ExplorerPage, { onNav, season });
 }
 Object.assign(window, { HomePage, JourneysPage, ChapterPage, ExplorerPage, BoutiquePage, SignaturePage, AboutPage, AboutFounder, ContactPage, PlanPage, PageIntro });

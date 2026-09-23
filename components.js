@@ -13,7 +13,7 @@ const IMG_DIMS = {
   "assets/signature-hero.jpg": [2000, 1125], "assets/hero-photo.jpg": [1800, 1013],
   "assets/chapter-explorer.jpg": [1350, 1800], "assets/chapter-boutique.jpg": [1280, 720],
   "assets/chapter-signature.jpg": [1800, 1350], "assets/journeys-signature.jpg": [1300, 1625],
-  "assets/jov-boutique.jpg": [1400, 1750], "assets/spotlight-terrace.jpg": [1400, 1680],
+  "assets/jov-boutique.jpg": [1400, 1750], "assets/signature-summer-hero.jpg": [2000, 1333], "assets/winter-signature-hero.jpg": [2000, 1325], "assets/winter-explorer-hero.jpg": [2000, 2667], "assets/winter-boutique-hero.jpg": [2000, 1333], "assets/spotlight-saentis.jpg": [1400, 1867],
   "assets/jcard-explorer.jpg": [900, 745], "assets/jcard-boutique.jpg": [900, 745],
   "assets/jcard-signature.jpg": [900, 745],
   "assets/moment-basel-art.jpg": [1600, 1200], "assets/moment-engadin-light.jpg": [1400, 933],

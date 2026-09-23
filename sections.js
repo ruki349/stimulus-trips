@@ -1,4 +1,4 @@
-function lines(arr) { return arr.map((l, i) => React.createElement(React.Fragment, { key: i }, l, i < arr.length - 1 ? React.createElement("br", null) : null)); }
+function lines(v) { const arr = Array.isArray(v) ? v : [v]; return arr.map((l, i) => React.createElement(React.Fragment, { key: i }, l, i < arr.length - 1 ? React.createElement("br", null) : null)); }
 
 function Hero({ c, onNav }) {
   return React.createElement("section", { className: "st-hero" },
@@ -41,7 +41,7 @@ function Spotlight({ c, flip = false }) {
         React.createElement(Eyebrow, null, c.placeEyebrow),
         React.createElement("h2", { className: "st-section-title" }, lines(c.placeTitle)),
         React.createElement("p", null, c.placeBody)),
-      React.createElement("div", { className: "st-spot-visual" }, React.createElement("img", Object.assign(imgAttrs("assets/spotlight-terrace.jpg", 1400, "(max-width: 900px) 100vw, 42vw"), { alt: "", loading: "lazy", style: { width: "100%", height: "100%", objectFit: "cover" } }))))));
+      React.createElement("div", { className: "st-spot-visual" }, React.createElement("img", Object.assign(imgAttrs("assets/spotlight-saentis.jpg", 1400, "(max-width: 900px) 100vw, 42vw"), { alt: "", loading: "lazy", style: { width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 100%" } }))))));
 }
 
 function CTABand({ eyebrow, title, lead, cta, onClick, dark = false }) {
@@ -85,6 +85,38 @@ function JourneyOverview({ journeys, onNav }) {
         React.createElement("p", { className: "st-chapter-text" }, j.desc),
         React.createElement("p", { className: "st-jov-quote" }, j.quote),
         React.createElement("div", { style: { marginTop: 6 } }, React.createElement(TextLink, { href: "/journeys/" + j.id, onClick: () => onNav("chapter", j.id) }, j.cta))))))));
+}
+
+function SeasonSwitch({ season, onSeason }) {
+  return React.createElement("div", { className: "st-season", role: "tablist", "aria-label": "Season" },
+    SEASONS.map((s, i) => React.createElement(React.Fragment, { key: s.id },
+      i > 0 && React.createElement("span", { className: "st-season-sep", "aria-hidden": "true" }),
+      React.createElement("button", { type: "button", role: "tab", "aria-selected": season === s.id,
+        className: "st-season-btn" + (season === s.id ? " is-on" : ""),
+        onClick: () => onSeason(s.id) }, s.label))));
+}
+
+function JourneyCompare({ season, onNav }) {
+  const cols = JOURNEY_COMPARE[season] || JOURNEY_COMPARE.summer;
+  const seasonLabel = (SEASONS.find(s => s.id === season) || SEASONS[0]).label;
+  const go = id => onNav("chapter", id, season);
+  return React.createElement("section", { className: "st-jcompare", "data-screen-label": "Journeys \u00B7 " + seasonLabel },
+    React.createElement("div", { className: "st-wrap" },
+      React.createElement("div", { className: "st-jcompare-grid", key: season },
+        cols.map(j => React.createElement(Reveal, { key: j.id, as: "article", className: "st-jcol", style: { cursor: "pointer" } },
+          React.createElement("div", { className: "st-jcol-in", onClick: () => go(j.id) },
+            React.createElement("div", { className: "st-jcol-body" },
+              React.createElement(Eyebrow, { className: "st-jcol-season" }, seasonLabel),
+              React.createElement("h2", { className: "st-jcol-name" }, j.name),
+              React.createElement("p", { className: "st-jcol-prop" }, j.prop),
+              React.createElement("p", { className: "st-jcol-route" }, j.route),
+              React.createElement("div", { className: "st-jcol-descs" },
+                (Array.isArray(j.desc) ? j.desc : [j.desc]).map((t, i) =>
+                  React.createElement("p", { key: i, className: "st-jcol-desc" }, t))),
+              React.createElement("p", { className: "st-jcol-quote" }, j.quote),
+              React.createElement("div", { className: "st-jcol-cta" },
+                React.createElement(TextLink, { href: "/" + j.id + (season === "winter" ? "?season=winter" : ""), onClick: () => go(j.id) },
+                  j.cta || ("Discover " + j.name + " \u2192"))))))))));
 }
 
 function FlexLine({ c }) {
@@ -138,15 +170,7 @@ function PlanSteps() {
       React.createElement("p", { className: "st-ps-text" }, d))))));
 }
 
-const PREVIEW_THANKS = (() => {
-  try {
-    if (/(^|\.)stimulustrips\.com$/.test(location.hostname)) return false;
-    if (window.__previewThanks === true) return true;
-    return new URLSearchParams(location.search).get("preview") === "thanks";
-  } catch (e) { return false; }
-})();
-
-function PlanForm({ journey, sent, onSent }) {
+function PlanForm({ journey, season, sent, onSent }) {
   const [errors, setErrors] = React.useState({});
   const [status, setStatus] = React.useState("idle");
   const started = React.useRef(false);
@@ -173,7 +197,7 @@ function PlanForm({ journey, sent, onSent }) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       setStatus("idle");
       onSent && onSent();
-      window.track && window.track("Form: submit", { journey: val("journey") || preset });
+      window.track && window.track("Form: submit", { journey: val("journey") || preset, season: val("season") });
     } catch (err) {
       setStatus("error");
     }
@@ -196,6 +220,7 @@ function PlanForm({ journey, sent, onSent }) {
         React.createElement("a", { className: "st-plan-mail", href: "mailto:" + EMAIL }, EMAIL))),
     React.createElement("form", { className: "st-form", name: "plan-a-journey", onSubmit, noValidate: true },
       React.createElement("input", { type: "hidden", name: "form-name", value: "plan-a-journey" }),
+      React.createElement("input", { type: "hidden", name: "season", value: season === "winter" ? "Winter" : "Summer" }),
       React.createElement("p", { className: "st-form-hp" }, React.createElement("label", null, "Don\u2019t fill this out if you\u2019re human: ", React.createElement("input", { name: "bot-field", tabIndex: -1, autoComplete: "off" }))),
       React.createElement("div", { className: "st-form-row" },
         field("name", "Your name *", React.createElement("input", Object.assign({ type: "text", autoComplete: "name", placeholder: "Your name" }, inputProps("name")))),
@@ -245,4 +270,4 @@ function ContactChannels({ onNav }) {
       React.createElement("p", { className: "st-contact-text" }, "For partnerships, collaborations or anything else:"),
       React.createElement("a", { className: "st-contact-link", href: "mailto:" + EMAIL }, EMAIL))));
 }
-Object.assign(window, { Hero, MeaningBand, WhyStimulus, Spotlight, CTABand, JourneyGrid, JourneyOverview, JourneyFit, FlexLine, FlexBand, EscapeBand, JourneyChapter, PlanSteps, PlanForm, PlanThanks, ContactChannels, PREVIEW_THANKS, lines });
+Object.assign(window, { Hero, MeaningBand, WhyStimulus, Spotlight, CTABand, JourneyGrid, JourneyOverview, JourneyCompare, SeasonSwitch, JourneyFit, FlexLine, FlexBand, EscapeBand, JourneyChapter, PlanSteps, PlanForm, PlanThanks, ContactChannels, lines });

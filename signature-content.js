@@ -1,11 +1,13 @@
 const SIGNATURE = {
   hero: {
-    photo: "assets/hero-photo.jpg",
-    eyebrow: "Signature",
+    photo: "assets/signature-summer-hero.jpg",
+    photoPos: "50% 80%",
+    eyebrow: "Summer",
+    journey: "Signature",
     title: "A journey that doesn't exist yet",
     lead: "No route, no fixed days, no template. Signature starts with a conversation and ends with a journey that has been written for one group of travellers only.",
-    meta: ["Length defined by you", "From CHF 6,200 per person"],
-    cta: "Start a Signature journey \u2192",
+    meta: ["Duration and shape defined around you.", "Pricing created around your journey"],
+    cta: "Start a conversation \u2192",
     quote: "\u201CWe don't adapt a journey to you. We write one with you\u201D"
   },
   idea: {
@@ -16,7 +18,7 @@ const SIGNATURE = {
     ]
   },
   steps: {
-    eyebrow: "How it works",
+    eyebrow: "How Signature begins",
     title: "Four conversations, one journey",
     items: [
       { num: "01", name: "We listen", text: "Who you are, why you're travelling and how you want the journey to feel." },
@@ -26,7 +28,7 @@ const SIGNATURE = {
     ]
   },
   shaped: {
-    title: ["Nothing is standard", "Everything is decided"],
+    title: ["Curated by us.", "Shaped around you."],
     lead: "In Signature there is no default version to depart from. Every element is a choice made together.",
     items: [
       ["Places", "Anywhere in Switzerland \u2014 and beyond when the journey calls for it."],
@@ -36,16 +38,20 @@ const SIGNATURE = {
     ],
     support: "\u201CThe only fixed element is that it belongs to you.\u201D"
   },
-  conversion: {
-    eyebrow: "Signature journeys",
-    duration: "Length and shape defined by you",
-    included: "Journey design \u00B7 Accommodation \u00B7 Transportation \u00B7 Private guides and specialists \u00B7 Experiences and reservations \u00B7 Stimulus support throughout",
-    amount: "From CHF 6,200 per person",
-    basis: "Based on two travellers sharing a room.",
-    note: "The final price depends on the journey we create together.",
-    cta: "Start a Signature journey \u2192",
-    support: "Every Stimulus journey begins with a conversation.",
-    notIncluded: "Not included: flights, travel insurance and personal expenses."
+  pricing: {
+    eyebrow: "Signature",
+    /* Signature is created individually — no starting price is shown. */
+    amount: "",
+    headline: "Pricing created around your journey",
+    meta: "Duration and shape defined around you.",
+    note: "Every Signature journey is created individually. Pricing reflects the duration, accommodation and experiences we design around you.",
+    cta: "Start a conversation \u2192"
+  },
+  final: {
+    title: "A journey that could only belong to you.",
+    body: "We create the journey around why you are travelling, how you want the days to feel, and the people and places that can make it extraordinary.",
+    cta: "Start a conversation \u2192",
+    support: "Every Stimulus journey begins with a conversation."
   }
 };
 Object.assign(window, { SIGNATURE });

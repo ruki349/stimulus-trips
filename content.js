@@ -30,6 +30,59 @@ const JOURNEY_OVERVIEW = [
     desc: "For travellers whose journey should begin with their own story rather than a predefined route.",
     quote: "\u201CA journey that could only belong to you\u201D", cta: "Explore Signature \u2192" }
 ];
+const SEASONS = [
+  { id: "summer", label: "Summer",
+    title: "Three ways to experience Switzerland",
+    lead: "Curated journeys by rail, water and mountain, shaped around you." },
+  { id: "winter", label: "Winter",
+    title: "Winter in a different light",
+    lead: "Ski and alpine journeys, shaped around you." }
+];
+const JOURNEY_COMPARE = {
+  summer: [
+    { id: "explorer", name: "Explorer", photo: "assets/chapter-explorer.jpg",
+      prop: "Discover Switzerland through movement",
+      route: "St. Moritz \u00B7 Chur \u00B7 Andermatt \u00B7 Lucerne",
+      desc: "For travellers who want the journey between places to become part of the experience. Panoramic rail, e-bike, ferry and mountain railway, at a slower and more meaningful pace.",
+      includes: ["Panoramic rail", "E-bike", "Ferry", "Mountain railway", "Hand-picked stays", "Our on-the-ground support"],
+      quote: "\u201CThe journey is part of the destination\u201D" },
+    { id: "boutique", name: "Boutique", photo: "assets/jov-boutique.jpg",
+      prop: "Discover Switzerland through its character",
+      route: "Z\u00FCrich \u00B7 Engadin \u00B7 Basel \u00B7 Lucerne",
+      desc: "For travellers who prefer to stay longer and look closer. Architecture, gastronomy, craftsmanship and the people who reveal what makes each place distinctive.",
+      includes: ["Characterful hotels", "Gastronomy", "Design", "Craftsmanship", "People", "Our on-the-ground support"],
+      quote: "\u201CDiscover what gives a place its character\u201D" },
+    { id: "signature", name: "Signature", photo: "assets/journeys-signature.jpg",
+      prop: "A journey shaped entirely around you",
+      route: "Personal creation",
+      desc: "For travellers whose journey should begin with their own story rather than a predefined route. Your people, your interests, your occasion, your time.",
+      includes: ["Bespoke itinerary", "Private guiding", "Exclusive access", "Extraordinary stays", "End-to-end support"],
+      quote: "\u201CA journey that could only belong to you\u201D" }
+  ],
+  winter: [
+    { id: "explorer", name: "Explorer",
+      prop: "Discover Switzerland through winter movement.",
+      route: "Zermatt \u00B7 Andermatt \u00B7 Lucerne",
+      desc: ["Two mountain regions, days on the snow and a journey through the Swiss Alps.",
+        "Ski and snowboard are at the heart of the journey, with the intensity shaped around your level and the way you want to experience the mountains."],
+      quote: "\u201CThe journey is part of the destination.\u201D",
+      cta: "Discover Winter Explorer \u2192" },
+    { id: "boutique", name: "Boutique",
+      prop: "Discover Switzerland through its winter character.",
+      route: "St. Moritz \u00B7 Zermatt",
+      desc: ["Experience two of Switzerland's most distinctive Alpine worlds through their places, people, food, architecture and winter culture.",
+        "A slower journey designed to understand what makes each place remarkable in winter."],
+      quote: "\u201CDiscover what gives a place its character.\u201D",
+      cta: "Discover Winter Boutique \u2192" },
+    { id: "signature", name: "Signature",
+      prop: "Winter, shaped entirely around you.",
+      route: "Personal creation",
+      desc: ["No fixed route. No predefined itinerary.",
+        "We begin with your reason for travelling, your interests, your pace and the kind of winter you want to experience \u2014 then curate Switzerland around you."],
+      quote: "\u201CA journey that could only belong to you.\u201D",
+      cta: "Discover Winter Signature \u2192" }
+  ]
+};
 const FIT = [
   { id: "explorer", want: "I want to move through Switzerland.", name: "Explorer" },
   { id: "boutique", want: "I want to understand Switzerland.", name: "Boutique" },
@@ -88,4 +141,4 @@ const COPY = {
   contactLead: ""
 };
 const EMAIL = "hi@stimulustrips.com";
-Object.assign(window, { JOURNEYS, JOURNEY_OVERVIEW, FIT, WHY, COPY, VALUES, PH, EMAIL });
+Object.assign(window, { JOURNEYS, JOURNEY_OVERVIEW, SEASONS, JOURNEY_COMPARE, FIT, WHY, COPY, VALUES, PH, EMAIL });
