@@ -6,7 +6,7 @@ const BOUTIQUE_CONTENT = {
       journey: "Boutique",
       title: "Discover Switzerland through its character",
       lead: "Stay longer in four places with genuinely different characters \u2014 an Alpine valley, a city of collectors, a lakeside town and a working metropolis \u2014 and look closer at what makes each one itself.",
-      meta: ["7 days \u00B7 6 nights", "From CHF 4,480 per person"],
+      meta: ["7 days \u00B7 6 nights", "Pricing shaped around your journey"],
       cta: "Plan my Boutique journey \u2192",
       quote: "\u201CDiscover what gives a place its character\u201D"
     },
@@ -51,8 +51,8 @@ const BOUTIQUE_CONTENT = {
       eyebrow: "Boutique",
       duration: "7 days \u00B7 6 nights",
       included: "Accommodation \u00B7 Breakfast \u00B7 Rail \u00B7 Private transfers \u00B7 Guided art and architecture morning \u00B7 Lake crossing \u00B7 Maker encounters \u00B7 Restaurant reservations \u00B7 Journey planning \u00B7 Stimulus support",
-      amount: "From CHF 4,480 per person",
-      basis: "Based on two travellers sharing.",
+      amount: "",
+      headline: "Pricing shaped around your journey",
       note: "Final pricing depends on travel dates, accommodation and the experiences we shape around you.",
       cta: "Plan my Boutique journey \u2192",
       support: "Every Stimulus journey begins with a conversation.",
@@ -155,7 +155,6 @@ const BOUTIQUE_CONTENT = {
       amount: "",
       headline: "Pricing shaped around your journey",
       meta: "8 days \u00B7 7 nights",
-      basis: "Based on two travellers sharing a room.",
       note: "Final pricing depends on travel dates, accommodation and the experiences we shape around you.",
       cta: "Start a conversation \u2192"
     },

@@ -9,7 +9,7 @@ function pathFor(view, id, season) {
   if (view === "chapter") return "/" + id + q;
   if (view === "about") return "/about";
   if (view === "contact") return "/contact";
-  if (view === "plan") { const qs = []; if (id) qs.push("journey=" + id); if (season === "winter") qs.push("season=winter"); return "/plan-a-journey" + (qs.length ? "?" + qs.join("&") : ""); }
+  if (view === "plan") { const qs = []; if (id) qs.push("journey=" + id); if (season === "winter" || season === "summer") qs.push("season=" + season); return "/plan-a-journey" + (qs.length ? "?" + qs.join("&") : ""); }
   return "/";
 }
 function parsePath(pathname, search) {
@@ -24,15 +24,15 @@ function parsePath(pathname, search) {
   if (path === "/contact") return { view: "contact" };
   if (path === "/plan-a-journey") {
     const j = (sp.get("journey") || "").toLowerCase();
-    return { view: "plan", id: JOURNEY_IDS.indexOf(j) > -1 ? j : "", season };
+    return { view: "plan", id: JOURNEY_IDS.indexOf(j) > -1 ? j : "", season: SEASON_IDS.indexOf(se) > -1 ? se : "" };
   }
   return { view: "home" };
 }
 const META = {
   home: ["Stimulus Trips — Journeys through Switzerland", "Stimulus is a network of people creating extraordinary journeys through Switzerland. Curated by us. Shaped around you.", "assets/signature-hero.jpg"],
   journeys: ["Journeys — Explorer, Boutique, Signature | Stimulus Trips", "Three ways to experience Switzerland: Explorer, Boutique and Signature. Every journey is shaped around you.", "assets/chapter-explorer.jpg"],
-  explorer: ["Explorer — Switzerland by rail, e-bike and ferry | Stimulus Trips", "An eight-day journey across Switzerland by panoramic rail, e-bike, ferry and mountain railway. From CHF 3,690 per person.", "assets/chapter-explorer.jpg"],
-  boutique: ["Boutique — Culture, food and craft in Switzerland | Stimulus Trips", "Seven days in four Swiss places, looking closer at architecture, gastronomy and craftsmanship. From CHF 4,480 per person.", "assets/jov-boutique.jpg"],
+  explorer: ["Explorer — Switzerland by rail, e-bike and ferry | Stimulus Trips", "An eight-day journey across Switzerland by panoramic rail, e-bike, ferry and mountain railway.", "assets/chapter-explorer.jpg"],
+  boutique: ["Boutique — Culture, food and craft in Switzerland | Stimulus Trips", "Seven days in four Swiss places, looking closer at architecture, gastronomy and craftsmanship.", "assets/jov-boutique.jpg"],
   signature: ["Signature — A journey written with you | Stimulus Trips", "A Swiss journey designed entirely around your interests, your people and your reason for travelling.", "assets/journeys-signature.jpg"],
   about: ["About Stimulus — A network of people | Stimulus Trips", "We connect remarkable people to create remarkable journeys through Switzerland.", "assets/moment-oberalp.jpg"],
   contact: ["Contact | Stimulus Trips", "Talk to Stimulus Trips: hi@stimulustrips.com or WhatsApp +41 76 237 33 74.", "assets/signature-hero.jpg"],

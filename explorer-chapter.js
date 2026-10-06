@@ -66,7 +66,7 @@ function valueFromConversion(c) {
   return { title: "The journey, taken care of.",
     items: c.included.split(" \u00B7 "),
     notIncluded: c.notIncluded.replace(/^Not included:\s*/i, ""),
-    price: { eyebrow: c.eyebrow, amount: c.amount, meta: c.duration, basis: c.basis, note: c.note, cta: c.cta } };
+    price: { eyebrow: c.eyebrow, amount: c.amount, headline: c.headline, meta: c.duration, basis: c.basis, note: c.note, cta: c.cta } };
 }
 
 function ExValue({ d, onNav, journey, season }) {
@@ -204,18 +204,18 @@ function ExShapedCompact({ d }) {
     React.createElement("p", { className: "st-exsc-support" }, d.support)));
 }
 
-function ExConversion({ d, onNav, journey }) {
+function ExConversion({ d, onNav, journey, season }) {
   return React.createElement("section", { className: "st-exconv" }, React.createElement("div", { className: "st-wrap st-exconv-in" },
     React.createElement(Eyebrow, { style: { color: "var(--lime)" } }, d.eyebrow),
     React.createElement("h2", { className: "st-exconv-duration" }, d.duration),
     React.createElement("div", { className: "st-exconv-incl" },
       React.createElement(Eyebrow, { style: { color: "rgba(246,241,232,.6)" } }, "Included"),
       React.createElement("p", null, d.included)),
-    React.createElement("p", { className: "st-exconv-amount" }, d.amount),
-    React.createElement("p", { className: "st-exconv-basis" }, d.basis),
+    React.createElement("p", { className: "st-exconv-amount" }, d.amount || d.headline),
+    d.basis && React.createElement("p", { className: "st-exconv-basis" }, d.basis),
     d.note && React.createElement("p", { className: "st-exconv-note" }, d.note),
     React.createElement("p", { className: "st-exconv-reassure" }, "Enquiring is free and commits you to nothing. Final pricing is confirmed in writing before anything is booked."),
-    React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey) }, d.cta),
+    React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, d.cta),
     React.createElement("p", { className: "st-exconv-support" }, d.support),
     React.createElement("p", { className: "st-exconv-not" }, d.notIncluded)));
 }

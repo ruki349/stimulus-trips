@@ -62,8 +62,8 @@ const JOURNEY_COMPARE = {
   winter: [
     { id: "explorer", name: "Explorer",
       prop: "Discover Switzerland through winter movement.",
-      route: "Zermatt \u00B7 Andermatt \u00B7 Lucerne",
-      desc: ["Two mountain regions, days on the snow and a journey through the Swiss Alps.",
+      route: "Zermatt \u00B7 7 nights",
+      desc: ["One week beneath the Matterhorn, most of it on the snow, with the strongest days placed where the weather is best.",
         "Ski and snowboard are at the heart of the journey, with the intensity shaped around your level and the way you want to experience the mountains."],
       quote: "\u201CThe journey is part of the destination.\u201D",
       cta: "Discover Winter Explorer \u2192" },

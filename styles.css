@@ -348,6 +348,8 @@ img { display: block; }
 
 /* ---- Plan · what happens next ---- */
 .st-plansteps { padding: clamp(30px,4vw,44px) 0 0; }
+.st-plan-flow { display: flex; flex-direction: column; }
+@media (max-width: 760px) { .st-plan-flow > .st-plansteps { order: 2; padding-bottom: 32px; } }
 .st-ps-list { list-style: none; margin: clamp(18px,2.4vw,26px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(20px,3vw,44px); border-top: 1px solid var(--line-strong); }
 .st-ps-item { padding-top: clamp(16px,2vw,22px); }
 .st-ps-num { display: block; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: .06em; color: var(--copper); }

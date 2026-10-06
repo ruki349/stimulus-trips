@@ -19,8 +19,9 @@ function PlanPage({ c, journey, season }) {
   const [sent, setSent] = React.useState(false);
   return React.createElement(React.Fragment, null,
     !sent && React.createElement(PageIntro, { eyebrow: c.planEyebrow, title: c.planTitle, lead: c.planLead }),
-    !sent && React.createElement(PlanSteps, null),
-    React.createElement(PlanForm, { journey, season, sent, onSent: () => setSent(true) }));
+    React.createElement("div", { className: "st-plan-flow" },
+      !sent && React.createElement(PlanSteps, null),
+      React.createElement(PlanForm, { journey, season, sent, onSent: () => setSent(true) })));
 }
 
 function JourneysIntro({ c, season, onSeason }) {

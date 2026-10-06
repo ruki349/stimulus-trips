@@ -220,7 +220,7 @@ function PlanForm({ journey, season, sent, onSent }) {
         React.createElement("a", { className: "st-plan-mail", href: "mailto:" + EMAIL }, EMAIL))),
     React.createElement("form", { className: "st-form", name: "plan-a-journey", onSubmit, noValidate: true },
       React.createElement("input", { type: "hidden", name: "form-name", value: "plan-a-journey" }),
-      React.createElement("input", { type: "hidden", name: "season", value: season === "winter" ? "Winter" : "Summer" }),
+      React.createElement("input", { type: "hidden", name: "season", value: season === "winter" ? "Winter" : season === "summer" ? "Summer" : "Not specified" }),
       React.createElement("p", { className: "st-form-hp" }, React.createElement("label", null, "Don\u2019t fill this out if you\u2019re human: ", React.createElement("input", { name: "bot-field", tabIndex: -1, autoComplete: "off" }))),
       React.createElement("div", { className: "st-form-row" },
         field("name", "Your name *", React.createElement("input", Object.assign({ type: "text", autoComplete: "name", placeholder: "Your name" }, inputProps("name")))),
