@@ -12,14 +12,22 @@ function pathFor(view, id, season) {
   if (view === "plan") { const qs = []; if (id) qs.push("journey=" + id); if (season === "winter" || season === "summer") qs.push("season=" + season); return "/plan-a-journey" + (qs.length ? "?" + qs.join("&") : ""); }
   return "/";
 }
+/* Applies WINTER_MODE (content.js): which ?season=winter views still exist. */
+function seasonFor(view, id, season) {
+  const mode = window.WINTER_MODE || "current";
+  if (season !== "winter" || mode === "current") return season;
+  if (mode === "hidden") return "summer";
+  if (view === "chapter" && (mode === "on-request" || id !== "signature")) return "summer";
+  return season;
+}
 function parsePath(pathname, search) {
   const path = pathname.replace(/\/index\.html$/, "").replace(/\/+$/, "") || "/";
   const sp = new URLSearchParams(search || "");
   const se = (sp.get("season") || "").toLowerCase();
   const season = SEASON_IDS.indexOf(se) > -1 ? se : "summer";
-  if (path === "/journeys") return { view: "journeys", season };
+  if (path === "/journeys") return { view: "journeys", season: seasonFor("journeys", null, season) };
   const m = path.match(/^\/(?:journeys\/)?(explorer|boutique|signature)$/);
-  if (m) return { view: "chapter", id: m[1], season };
+  if (m) return { view: "chapter", id: m[1], season: seasonFor("chapter", m[1], season) };
   if (path === "/about") return { view: "about" };
   if (path === "/contact") return { view: "contact" };
   if (path === "/plan-a-journey") {
@@ -31,8 +39,8 @@ function parsePath(pathname, search) {
 const META = {
   home: ["Stimulus Trips — Journeys through Switzerland", "Stimulus is a network of people creating extraordinary journeys through Switzerland. Curated by us. Shaped around you.", "assets/signature-hero.jpg"],
   journeys: ["Journeys — Explorer, Boutique, Signature | Stimulus Trips", "Three ways to experience Switzerland: Explorer, Boutique and Signature. Every journey is shaped around you.", "assets/chapter-explorer.jpg"],
-  explorer: ["Explorer — Switzerland by rail, e-bike and ferry | Stimulus Trips", "An eight-day journey across Switzerland by panoramic rail, e-bike, ferry and mountain railway.", "assets/chapter-explorer.jpg"],
-  boutique: ["Boutique — Culture, food and craft in Switzerland | Stimulus Trips", "Seven days in four Swiss places, looking closer at architecture, gastronomy and craftsmanship.", "assets/jov-boutique.jpg"],
+  explorer: ["Explorer — Discover Switzerland through movement | Stimulus Trips", "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. The route is fixed. The intensity is not.", "assets/chapter-explorer.jpg"],
+  boutique: ["Boutique — Fewer places. More depth. | Stimulus Trips", "Eight days with two nights each in Appenzell, on Lake Lucerne and in Zermatt, and a last night in Zürich. Stay longer. Look closer.", "assets/hero-photo.jpg"],
   signature: ["Signature — A journey written with you | Stimulus Trips", "A Swiss journey designed entirely around your interests, your people and your reason for travelling.", "assets/journeys-signature.jpg"],
   about: ["About Stimulus — A network of people | Stimulus Trips", "We connect remarkable people to create remarkable journeys through Switzerland.", "assets/moment-oberalp.jpg"],
   contact: ["Contact | Stimulus Trips", "Talk to Stimulus Trips: hi@stimulustrips.com or WhatsApp +41 76 237 33 74.", "assets/signature-hero.jpg"],
@@ -49,6 +57,7 @@ function App() {
   const first = React.useRef(true);
   const nav = (view, id, season) => {
     if (view === "plan") window.track && window.track("CTA: Plan a journey", { from: route.view === "chapter" ? route.id : route.view });
+    season = seasonFor(view, id, season);
     setRoute({ view, id, season });
     window.history.pushState({ view, id, season }, "", pathFor(view, id, season));
     window.scrollTo({ top: 0, behavior: "smooth" });

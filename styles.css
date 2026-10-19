@@ -204,6 +204,7 @@ img { display: block; }
 .st-exroute-stops li { display: flex; align-items: center; gap: 14px; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 20px; color: var(--ink); padding: 10px 0; position: relative; }
 .st-exroute-stops li:not(:last-child)::after { content: ""; position: absolute; left: 4px; top: 32px; bottom: -2px; width: 1px; background: var(--line-strong); }
 .st-exroute-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--copper); flex-shrink: 0; }
+.st-exroute-nights { margin-left: auto; padding-left: 16px; font-family: var(--font-sans); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-2); white-space: nowrap; }
 .st-exroute-facts { display: flex; flex-direction: column; gap: 6px; padding-top: 20px; border-top: 1px solid var(--line); }
 .st-exroute-facts span { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-3); }
 .st-exroute-note { font-size: 15.5px; line-height: 1.7; color: var(--fg-2); margin: 0; max-width: 460px; }
@@ -625,3 +626,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .st-exhero.is-center .st-exhero-meta { justify-content: center; }
 .st-exhero.is-center .st-hero-scrim { background: radial-gradient(ellipse 60% 70% at 50% 62%, rgba(26,23,20,0.5) 0%, rgba(26,23,20,0.18) 60%, rgba(26,23,20,0.06) 100%), linear-gradient(to top, rgba(26,23,20,0.45) 0%, rgba(26,23,20,0) 50%); }
 @media (max-width: 760px) { .st-exhero .st-hero-photo img { object-position: var(--pos-m) !important; } }
+
+/* Winter on request (WINTER_MODE = "on-request") */
+.st-winter-req { padding: 8px 0 clamp(52px,7vw,84px); }
+.st-jcompare-grid.is-single { grid-template-columns: minmax(0, 440px); }
+/* Route map legibility on phones: the SVG scales to ~40%, so labels are set larger in SVG units. */
+@media (max-width: 560px) {
+  .st-rmap-label { font-size: 26px; }
+  .st-rmap-legend-label { font-size: 19px; }
+  .st-rmap-country { font-size: 18px; }
+  .st-rmap-leg { stroke-width: 3; }
+  .st-rmap-dot { r: 8px; }
+}

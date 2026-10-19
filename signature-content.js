@@ -8,13 +8,13 @@ const SIGNATURE = {
     lead: "No route, no fixed days, no template. Signature starts with a conversation and ends with a journey that has been written for one group of travellers only.",
     meta: ["Duration and shape defined around you.", "Pricing created around your journey"],
     cta: "Start a conversation \u2192",
-    quote: "\u201CWe don't adapt a journey to you. We write one with you\u201D"
+    quote: "\u201CWe don't adapt a journey to you. We write one with you.\u201D"
   },
   idea: {
     title: ["Don't choose a journey", "Create one"],
     body: [
       "Explorer begins with a route. Boutique begins with a collection of places. Signature begins with you.",
-      "We create the journey around why you are travelling, how you want the days to feel, and the people and places that can make it extraordinary."
+      "We create the journey around why you are travelling, how you want the days to feel, and the people and places that can open it to you."
     ]
   },
   steps: {
@@ -32,7 +32,7 @@ const SIGNATURE = {
     lead: "In Signature there is no default version to depart from. Every element is a choice made together.",
     items: [
       ["Places", "Anywhere in Switzerland \u2014 and beyond when the journey calls for it."],
-      ["Stays", "Hotels, private houses, mountain retreats and remarkable places to stay."],
+      ["Stays", "Hotels, private houses and mountain retreats, chosen for the journey."],
       ["People", "Guides, chefs, historians, makers and specialists chosen for the journey."],
       ["Rhythm", "Full days, slow days and everything in between."]
     ],
@@ -49,7 +49,7 @@ const SIGNATURE = {
   },
   final: {
     title: "A journey that could only belong to you.",
-    body: "We create the journey around why you are travelling, how you want the days to feel, and the people and places that can make it extraordinary.",
+    body: "Tell us why you are travelling and how you want the days to feel. We'll write the first version of your journey from there.",
     cta: "Start a conversation \u2192",
     support: "Every Stimulus journey begins with a conversation."
   }

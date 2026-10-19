@@ -97,12 +97,16 @@ function SeasonSwitch({ season, onSeason }) {
 }
 
 function JourneyCompare({ season, onNav }) {
-  const cols = JOURNEY_COMPARE[season] || JOURNEY_COMPARE.summer;
+  if (season === "winter" && WINTER_MODE === "on-request") return React.createElement("section", { className: "st-jcompare", "data-screen-label": "Journeys \u00B7 Winter" },
+    React.createElement("div", { className: "st-wrap" }, React.createElement("div", { className: "st-winter-req" },
+      React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", null, "winter") }, WINTER_ALT.onRequest.cta))));
+  const all = JOURNEY_COMPARE[season] || JOURNEY_COMPARE.summer;
+  const cols = season === "winter" && WINTER_MODE === "signature-only" ? all.filter(j => j.id === "signature") : all;
   const seasonLabel = (SEASONS.find(s => s.id === season) || SEASONS[0]).label;
   const go = id => onNav("chapter", id, season);
   return React.createElement("section", { className: "st-jcompare", "data-screen-label": "Journeys \u00B7 " + seasonLabel },
     React.createElement("div", { className: "st-wrap" },
-      React.createElement("div", { className: "st-jcompare-grid", key: season },
+      React.createElement("div", { className: "st-jcompare-grid" + (cols.length === 1 ? " is-single" : ""), key: season },
         cols.map(j => React.createElement(Reveal, { key: j.id, as: "article", className: "st-jcol", style: { cursor: "pointer" } },
           React.createElement("div", { className: "st-jcol-in", onClick: () => go(j.id) },
             React.createElement("div", { className: "st-jcol-body" },

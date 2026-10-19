@@ -31,7 +31,7 @@ function ExRoute({ d }) {
       React.createElement("div", { className: `st-exroute-map ${window.RouteMap && d.stops ? "has-map" : ""}` },
         window.RouteMap && d.stops ? React.createElement(RouteMap, { stops: d.stops, legs: d.legs }) : (d.mapNote || "Route map \u2014 visual to be added")),
       React.createElement("div", { className: "st-exroute-body" },
-        React.createElement("ol", { className: "st-exroute-stops" }, d.stops.map((s, i) => React.createElement("li", { key: i }, React.createElement("span", { className: "st-exroute-dot" }), s))),
+        React.createElement("ol", { className: "st-exroute-stops" }, d.stops.map((s, i) => React.createElement("li", { key: i }, React.createElement("span", { className: "st-exroute-dot" }), s, d.nights && d.nights[i] && React.createElement("span", { className: "st-exroute-nights" }, d.nights[i])))),
         React.createElement("div", { className: "st-exroute-facts" },
           React.createElement("span", null, d.duration),
           React.createElement("span", null, d.modes)),

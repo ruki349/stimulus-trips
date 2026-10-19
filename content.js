@@ -1,15 +1,15 @@
 const PH = "assets/";
 const JOURNEYS = [
   { id: "explorer", title: "Explorer", mode: "Move through Switzerland differently", days: "",
-    arc: ["Lucerne", "Interlaken", "Zermatt", "Zurich"],
+    arc: ["Lucerne", "Lungern", "Brienz", "Lauterbrunnen"],
     lead: "Move through Switzerland differently.",
-    body: "Travel through Switzerland using panoramic trains, scenic ferries, bicycles and carefully selected routes, experiencing the country at a slower and more meaningful pace." },
+    body: "Rail, boat, e-bike and on foot, from Lake Lucerne to the Lauterbrunnen valley. The way between places is part of the journey." },
   { id: "boutique", title: "Boutique", mode: "See Switzerland through its culture", days: "",
-    arc: ["St. Moritz", "Lucerne", "Basel", "Zurich"],
+    arc: ["Appenzell", "Lake Lucerne", "Zermatt", "Z\u00FCrich"],
     lead: "See Switzerland through its culture.",
     body: "Architecture, gastronomy, craftsmanship and thoughtfully selected experiences reveal another side of Switzerland." },
   { id: "signature", title: "Signature", mode: "Switzerland, shaped around you", days: "",
-    arc: ["Zurich", "St. Moritz", "Andermatt", "Zermatt"],
+    arc: [],
     lead: "Switzerland, shaped around you.",
     body: "A journey shaped entirely around you \u2014 your interests, your time and your reason for travelling." }
 ];
@@ -18,17 +18,17 @@ const JOURNEY_OVERVIEW = [
     prop: "Discover Switzerland through movement",
     tags: "Rail \u00B7 E-bike \u00B7 Ferry \u00B7 Mountain railway",
     desc: "For travellers who want the journey between places to become part of the experience.",
-    quote: "\u201CThe journey is part of the destination\u201D", cta: "Explore Explorer \u2192" },
+    quote: "\u201CThe route is fixed. The intensity is not.\u201D", cta: "Explore Explorer \u2192" },
   { id: "boutique", name: "Boutique", photo: "assets/jov-boutique.jpg",
-    prop: "Discover Switzerland through its character",
-    tags: "Culture \u00B7 Gastronomy \u00B7 Design \u00B7 Craftsmanship \u00B7 People",
-    desc: "For travellers who prefer to stay longer, look closer and understand what makes each place distinctive.",
-    quote: "\u201CDiscover what gives a place its character\u201D", cta: "Explore Boutique \u2192" },
+    prop: "Fewer places. More depth.",
+    tags: "Stays \u00B7 People \u00B7 Food \u00B7 Lake \u00B7 Mountains",
+    desc: "For travellers who prefer to stay longer, look closer and meet the people who know each place.",
+    quote: "\u201CStay longer. Look closer.\u201D", cta: "Explore Boutique \u2192" },
   { id: "signature", name: "Signature", photo: "assets/journeys-signature.jpg",
     prop: "A journey shaped entirely around you",
     tags: "People \u00B7 Interests \u00B7 Occasion \u00B7 Time",
     desc: "For travellers whose journey should begin with their own story rather than a predefined route.",
-    quote: "\u201CA journey that could only belong to you\u201D", cta: "Explore Signature \u2192" }
+    quote: "\u201CWe don't adapt a journey to you. We write one with you.\u201D", cta: "Explore Signature \u2192" }
 ];
 const SEASONS = [
   { id: "summer", label: "Summer",
@@ -42,22 +42,22 @@ const JOURNEY_COMPARE = {
   summer: [
     { id: "explorer", name: "Explorer", photo: "assets/chapter-explorer.jpg",
       prop: "Discover Switzerland through movement",
-      route: "St. Moritz \u00B7 Chur \u00B7 Andermatt \u00B7 Lucerne",
-      desc: "For travellers who want the journey between places to become part of the experience. Panoramic rail, e-bike, ferry and mountain railway, at a slower and more meaningful pace.",
-      includes: ["Panoramic rail", "E-bike", "Ferry", "Mountain railway", "Hand-picked stays", "Our on-the-ground support"],
-      quote: "\u201CThe journey is part of the destination\u201D" },
-    { id: "boutique", name: "Boutique", photo: "assets/jov-boutique.jpg",
-      prop: "Discover Switzerland through its character",
-      route: "Z\u00FCrich \u00B7 Engadin \u00B7 Basel \u00B7 Lucerne",
-      desc: "For travellers who prefer to stay longer and look closer. Architecture, gastronomy, craftsmanship and the people who reveal what makes each place distinctive.",
-      includes: ["Characterful hotels", "Gastronomy", "Design", "Craftsmanship", "People", "Our on-the-ground support"],
-      quote: "\u201CDiscover what gives a place its character\u201D" },
+      route: "Lucerne \u00B7 Lungern \u00B7 Brienz \u00B7 Lauterbrunnen",
+      desc: "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. Not a cycling tour.",
+      includes: ["Rail", "Boat", "E-bike", "On foot", "Selected stays", "Stimulus support"],
+      quote: "\u201CThe route is fixed. The intensity is not.\u201D" },
+    { id: "boutique", name: "Boutique", photo: "assets/hero-photo.jpg",
+      prop: "Fewer places. More depth.",
+      route: "Appenzell \u00B7 Lake Lucerne \u00B7 Zermatt \u00B7 Z\u00FCrich",
+      desc: "Eight days, two nights in each place. Time with the people who know it, and no cycling between stages.",
+      includes: ["Stays with character", "Local hosts", "Food and provenance", "Time on the lake", "Stimulus support"],
+      quote: "\u201CStay longer. Look closer.\u201D" },
     { id: "signature", name: "Signature", photo: "assets/journeys-signature.jpg",
-      prop: "A journey shaped entirely around you",
-      route: "Personal creation",
-      desc: "For travellers whose journey should begin with their own story rather than a predefined route. Your people, your interests, your occasion, your time.",
-      includes: ["Bespoke itinerary", "Private guiding", "Exclusive access", "Extraordinary stays", "End-to-end support"],
-      quote: "\u201CA journey that could only belong to you\u201D" }
+      prop: "Switzerland, shaped around you",
+      route: "No fixed route",
+      desc: "For travellers whose journey begins with their own story, not a predefined route. Your people, your interests, your occasion, your time.",
+      includes: ["A journey written with you", "Private guiding", "Stays chosen for you", "Stimulus support from first conversation to last day"],
+      quote: "\u201CWe don't adapt a journey to you. We write one with you.\u201D" }
   ],
   winter: [
     { id: "explorer", name: "Explorer",
@@ -83,6 +83,19 @@ const JOURNEY_COMPARE = {
       cta: "Discover Winter Signature \u2192" }
   ]
 };
+/* WINTER — product paused (pilot only). Pick ONE mode; nothing else needs to change.
+   "current"        = as published before rutas-v2 (Winter Explorer / Boutique / Signature pages)
+   "hidden"         = no Summer | Winter selector; every ?season=winter URL falls back to summer
+   "on-request"     = selector stays; Winter shows one panel that leads to the form (season=winter)
+   "signature-only" = selector stays; Winter shows only Signature; Explorer/Boutique are summer-only */
+const WINTER_MODE = "current";
+const WINTER_ALT = {
+  onRequest: { title: "Winter, shaped on request",
+    lead: "Our winter journeys are not published yet. Tell us when you would like to travel and we'll shape one with you.",
+    cta: "Plan a winter journey \u2192" },
+  signatureOnly: { title: "Winter, shaped around you",
+    lead: "Explorer and Boutique are summer journeys. In winter, every journey is written with you." }
+};
 const FIT = [
   { id: "explorer", want: "I want to move through Switzerland.", name: "Explorer" },
   { id: "boutique", want: "I want to understand Switzerland.", name: "Boutique" },
@@ -97,7 +110,7 @@ const WHY = {
     { num: "02", name: "People open places", text: "Guides, hosts, makers, chefs and specialists bring Switzerland closer in ways a conventional itinerary cannot." },
     { num: "03", name: "We stay with you", text: "From the first conversation to the journey itself, Stimulus remains your point of contact." }
   ],
-  brand: "Curated by us. Shaped around you",
+  brand: "Curated by us. Shaped around you.",
   cta: "Discover Stimulus"
 };
 const VALUES = [
@@ -118,7 +131,7 @@ const COPY = {
   fitEyebrow: "Find your journey",
   fitTitle: "Which journey feels like you?",
   journeysHeroTitle: "Three ways to experience Switzerland",
-  journeysPrinciple: "Curated by us. Shaped around you",
+  journeysPrinciple: "Curated by us. Shaped around you.",
   flexLine: "Three starting points. Never fixed packages. Every journey is shaped around you",
   escapeTitle: "Not sure which one fits you?",
   escapeBody: "Every Stimulus journey begins with a conversation.",
@@ -141,4 +154,4 @@ const COPY = {
   contactLead: ""
 };
 const EMAIL = "hi@stimulustrips.com";
-Object.assign(window, { JOURNEYS, JOURNEY_OVERVIEW, SEASONS, JOURNEY_COMPARE, FIT, WHY, COPY, VALUES, PH, EMAIL });
+Object.assign(window, { WINTER_MODE, WINTER_ALT, JOURNEYS, JOURNEY_OVERVIEW, SEASONS, JOURNEY_COMPARE, FIT, WHY, COPY, VALUES, PH, EMAIL });

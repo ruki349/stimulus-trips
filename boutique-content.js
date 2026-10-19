@@ -1,67 +1,59 @@
 const BOUTIQUE_CONTENT = {
   summer: {
     hero: {
-      photo: "assets/chapter-boutique.jpg",
+      photo: "assets/hero-photo.jpg",
+      photoPos: "50% 50%",
+      photoPosMobile: "62% 50%",
       eyebrow: "Summer",
       journey: "Boutique",
-      title: "Discover Switzerland through its character",
-      lead: "Stay longer in four places with genuinely different characters \u2014 an Alpine valley, a city of collectors, a lakeside town and a working metropolis \u2014 and look closer at what makes each one itself.",
-      meta: ["7 days \u00B7 6 nights", "Pricing shaped around your journey"],
-      cta: "Plan my Boutique journey \u2192",
-      quote: "\u201CDiscover what gives a place its character\u201D"
+      title: "Fewer places. More depth.",
+      lead: "Two nights in Appenzell, two on Lake Lucerne, two in Zermatt and a last night in Zürich. Time to stay, and to meet the people who know each place.",
+      meta: ["8 days · 7 nights", "Pricing shaped around your journey"],
+      cta: "Plan my Boutique journey →",
+      quote: "“Stay longer. Look closer.”"
     },
     journey: {
       eyebrow: "The places",
-      title: "The Boutique journey",
-      stops: ["Z\u00FCrich", "St. Moritz", "Basel", "Lucerne", "Z\u00FCrich"],
-      legs: ["rail", "rail", "rail", "rail"],
-      duration: "7 days \u00B7 6 nights",
-      modes: "Rail \u00B7 On foot \u00B7 Lake boat",
-      note: "This is our reference Boutique journey. The places, the encounters and the time spent in each are shaped around what interests you most.",
-      highlights: [
-        ["Z\u00FCrich", "Contemporary Switzerland"],
-        ["Engadin", "Alpine light and craft"],
-        ["Basel", "Art, architecture and the Rhine"],
-        ["Lucerne", "Lake, old town and water"]
-      ]
+      title: "Three places, two nights each",
+      stops: ["Zürich", "Appenzell", "Lake Lucerne", "Zermatt", "Zürich"],
+      nights: ["Arrival", "2 nights", "2 nights", "2 nights", "1 night"],
+      legs: ["travel", "travel", "travel", "travel"],
+      duration: "8 days · 7 nights",
+      modes: "Rail · Road · Lake · On foot",
+      note: "No cycling between places. The stays, the encounters and the time in each place are shaped around what interests you most."
     },
     stages: [
-      { place: "Z\u00FCrich", text: "Contemporary Switzerland." },
-      { place: "Engadin", text: "Alpine light and craft." },
-      { place: "Basel", text: "Art, architecture and the Rhine." },
-      { place: "Lucerne", text: "Lake, old town and water." }
-    ],
-    moments: [
-      { num: "01", title: "The light of the Engadin", text: "Sgraffito houses, a mountain studio, and the lakes that made this valley what it is.", photo: "assets/moment-engadin-light.jpg" },
-      { num: "02", title: "Makers in Z\u00FCrich", text: "Workshops, roasters and small kitchens behind the banks and the lake.", photo: "assets/moment-makers-kitchen.jpg" },
-      { num: "03", title: "Art and architecture in Basel", text: "Contemporary architecture and a world-class collection on the edge of the city.", photo: "assets/moment-basel-art.jpg" }
+      { place: "Appenzell", meta: "2 nights", text: "People and tradition. Someone shows you their Switzerland." },
+      { place: "Lake Lucerne", meta: "2 nights", text: "Water and stillness. Unhurried hours on the lake with someone who knows it." },
+      { place: "Zermatt", meta: "2 nights", text: "The high Alps. The people who live beneath the mountain." },
+      { place: "Zürich", meta: "1 night", text: "Back to contemporary Switzerland. A quiet last evening." }
     ],
     shaped: {
       title: ["Curated by us.", "Shaped around you."],
-      lead: "Boutique has a carefully curated foundation, but the emphasis is yours to choose.",
+      lead: "The places are curated. What you do in each one is yours to choose.",
       items: [
-        ["Your pace", "Stay longer in one place, or move at a fuller rhythm."],
-        ["Your stays", "From design hotels to historic and family-run houses."],
-        ["Your gastronomy", "Chef's tables, markets, producers and wine."],
-        ["Your experiences", "More time with makers, curators and guides."]
+        ["Your days", "A morning with a host. An afternoon left open."],
+        ["Your stays", "Chosen for character and for the people who run them."],
+        ["Your table", "Where food comes from, and who makes it."],
+        ["Your pace", "A long walk or a long lunch. Nothing is programmed by the hour."]
       ],
-      support: "We shape the emphasis around how you want to travel."
+      support: "Stay longer. Look closer."
     },
     conversion: {
       eyebrow: "Boutique",
-      duration: "7 days \u00B7 6 nights",
-      included: "Accommodation \u00B7 Breakfast \u00B7 Rail \u00B7 Private transfers \u00B7 Guided art and architecture morning \u00B7 Lake crossing \u00B7 Maker encounters \u00B7 Restaurant reservations \u00B7 Journey planning \u00B7 Stimulus support",
+      duration: "8 days · 7 nights",
+      included: "Accommodation · Breakfast · Travel between places · Selected local encounters · Restaurant reservations · Journey planning · Stimulus support during the journey",
       amount: "",
       headline: "Pricing shaped around your journey",
       note: "Final pricing depends on travel dates, accommodation and the experiences we shape around you.",
-      cta: "Plan my Boutique journey \u2192",
+      cta: "Plan my Boutique journey →",
       support: "Every Stimulus journey begins with a conversation.",
       notIncluded: "Not included: flights, most lunches and dinners, travel insurance and personal expenses."
     },
     final: {
-      title: "Ready to discover Switzerland differently?",
-      body: "Tell us what draws you to Switzerland \u2014 the places, food, architecture, people or culture. We'll shape the journey around what matters to you.",
-      cta: "Plan my Boutique journey \u2192",
+      title: "Tell us what draws you to Switzerland.",
+      body: "The places, the food, the people, the mountains. We'll shape the journey around what matters to you.",
+      cta: "Plan my Boutique journey →",
       support: "Every Stimulus journey begins with a conversation."
     }
   },

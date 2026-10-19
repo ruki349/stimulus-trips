@@ -5,65 +5,54 @@ const EXPLORER_CONTENT = {
       eyebrow: "Summer",
       journey: "Explorer",
       title: "Discover Switzerland through movement",
-      lead: "Travel across the country by rail, e-bike, ferry and mountain railway, following carefully curated routes where the journey itself becomes part of the experience.",
-      meta: ["8 days \u00B7 7 nights", "Pricing shaped around your journey"],
-      cta: "Plan my Explorer journey \u2192",
-      quote: "\u201CThe journey is part of the destination\u201D"
+      lead: "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. The way between places is part of the journey.",
+      meta: ["8 days · 7 nights", "Pricing shaped around your journey"],
+      cta: "Plan my Explorer journey →",
+      quote: "“The route is fixed. The intensity is not.”"
     },
     journey: {
       eyebrow: "The route",
-      title: "The Explorer journey",
-      stops: ["Z\u00FCrich", "St. Moritz", "Chur", "Disentis", "Andermatt", "Lucerne", "Z\u00FCrich"],
-      legs: ["rail", "rail", "bike", "bike", "water", "rail"],
-      duration: "8 days \u00B7 7 nights",
-      modes: "Rail \u00B7 Panoramic rail \u00B7 E-bike \u00B7 Ferry",
-      note: "This is our reference Explorer journey. The pace, stays and individual stages are shaped around you.",
-      highlights: [
-        ["Engadin", "Above the lakes"],
-        ["Graub\u00FCnden", "Cross by panoramic rail"],
-        ["Rhine Valley", "Follow the river by e-bike"],
-        ["Oberalp", "Cross the Alps"],
-        ["Lake Lucerne", "Arrive by water"]
-      ]
+      title: "Lake to valley",
+      stops: ["Zürich", "Lucerne", "Lungern", "Brienz", "Lauterbrunnen", "Zürich"],
+      nights: ["Arrival", "1 night", "1 night", "2 nights", "2 nights", "1 night"],
+      legs: ["rail", "move", "move", "move", "rail"],
+      duration: "8 days · 7 nights",
+      modes: "Rail · Boat · E-bike · On foot",
+      note: "Not a cycling tour. The route is the same for everyone. How much of it you ride, walk or travel by rail and boat is shaped around you."
     },
     stages: [
-      { place: "Engadin", text: "Above the lakes." },
-      { place: "Graub\u00FCnden", text: "Cross by panoramic rail." },
-      { place: "Rhine Valley", text: "Follow the river by e-bike." },
-      { place: "Oberalp", text: "Cross the Alps." },
-      { place: "Lake Lucerne", text: "Arrive by water." }
-    ],
-    moments: [
-      { num: "01", title: "Cross Graub\u00FCnden by rail", text: "Panoramic rail through one of Switzerland's defining railway landscapes.", photo: "assets/moment-rhaetian-rail.jpg" },
-      { num: "02", title: "Follow the Rhine", text: "Leave Chur by e-bike and move deeper into the Alps.", photo: "assets/moment-rhine-ebike.jpg" },
-      { num: "03", title: "From the Alps to the lake", text: "Cross the Oberalp before reaching Lake Lucerne and changing rhythm completely.", photo: "assets/moment-lake-boat.jpg" }
+      { place: "Lucerne", meta: "1 night", text: "The journey begins. An evening by the lake, at your own pace." },
+      { place: "Lungern", meta: "1 night", text: "The first day in motion. A village above the lake, and the people who live from the land." },
+      { place: "Brienz", meta: "2 nights", text: "Over the Brünig into the Bernese Oberland. Then a day on the lake with nothing fixed." },
+      { place: "Lauterbrunnen", meta: "2 nights", text: "Arrive in the valley of waterfalls. A morning with someone who knows the alps." },
+      { place: "Zürich", meta: "1 night", text: "A last morning in the mountains. A quiet evening in the city." }
     ],
     shaped: {
-      title: ["Curated by us", "Shaped around you"],
-      lead: "Explorer has a carefully curated foundation, but it isn't a rigid itinerary.",
+      title: ["Curated by us.", "Shaped around you."],
+      lead: "Everyone travels the same route. No two people travel it the same way.",
       items: [
-        ["Pace", "Longer or shorter, at your rhythm."],
-        ["Cycling", "Full stages, or combined with rail."],
-        ["Stays", "Chosen to match your preferences."],
-        ["Experiences", "Gastronomy, culture or mountain moments."]
+        ["Movement", "More riding, or more rail and boat. Decided with you before you leave."],
+        ["Rhythm", "Days in motion, and days when nothing needs to happen."],
+        ["Stays", "An old town, a village, a lakeshore, a valley. Each night feels like the place."],
+        ["People", "A few encounters that matter, not a visit every day."]
       ],
-      support: "We shape the emphasis around how you want to travel."
+      support: "The route is fixed. The intensity is not."
     },
     conversion: {
       eyebrow: "Explorer",
-      duration: "8 days \u00B7 7 nights",
-      included: "Accommodation \u00B7 Breakfast \u00B7 Rail \u00B7 Panoramic rail \u00B7 E-bike \u00B7 Luggage transfers \u00B7 Ferry \u00B7 Journey planning \u00B7 Stimulus support",
+      duration: "8 days · 7 nights",
+      included: "Accommodation · Breakfast · Rail and boat between stages · E-bike for the riding stages · Selected local encounters · Journey planning · Stimulus support during the journey",
       amount: "",
       headline: "Pricing shaped around your journey",
       note: "Final pricing depends on travel dates, accommodation and how we shape the journey around you.",
-      cta: "Plan my Explorer journey \u2192",
+      cta: "Plan my Explorer journey →",
       support: "Every Stimulus journey begins with a conversation.",
       notIncluded: "Not included: flights, most lunches and dinners, travel insurance and personal expenses."
     },
     final: {
-      title: "Ready to experience Switzerland differently?",
-      body: "Tell us when you're travelling, what draws you to Switzerland and how you like to move.",
-      cta: "Plan my Explorer journey \u2192",
+      title: "Tell us how you like to move.",
+      body: "When you're travelling, who is coming and how active you want the days to be. We'll shape the route from there.",
+      cta: "Plan my Explorer journey →",
       support: "Every Stimulus journey begins with a conversation."
     }
   },

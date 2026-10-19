@@ -1,4 +1,5 @@
-/* Reusable route map — real Switzerland geometry (Natural Earth via world-atlas), copper route arcs. */
+/* Reusable route map — real Switzerland geometry (Natural Earth 1:50m, clipped + simplified into
+   assets/switzerland-map.json, ~9 KB, no CDN), copper route arcs. */
 (function () {
   const PLACES = {
     "Z\u00FCrich":    { c: [8.5417, 47.3769], anchor: "start", dy: -14 },
@@ -17,19 +18,24 @@
     "Geneva":        { c: [6.1432, 46.2044], anchor: "end",   dy: 20 },
     "Lausanne":      { c: [6.6323, 46.5197], anchor: "end",   dy: 20 },
     "Montreux":      { c: [6.9107, 46.4312], anchor: "end",   dy: 20 },
-    "Appenzell":     { c: [9.4100, 47.3300], anchor: "start", dy: -12 }
+    "Appenzell":     { c: [9.4096, 47.3310], anchor: "start", dy: -12 },
+    "Lungern":       { c: [8.1603, 46.7858], anchor: "start", dy: 5 },
+    "Brienz":        { c: [8.0386, 46.7541], anchor: "end",   dy: -10 },
+    "Lauterbrunnen": { c: [7.9091, 46.5935], anchor: "end",   dy: 20 },
+    "Lake Lucerne":  { c: [8.4850, 47.0090], anchor: "start", dy: 20 }
   };
   const NEIGHBOURS = [
     { name: "France",  at: [6.15, 46.75] },
     { name: "Germany", at: [8.30, 47.95] },
-    { name: "Austria", at: [10.20, 47.35] },
+    { name: "Austria", at: [10.55, 47.20] },
     { name: "Italy",   at: [8.55, 45.70] }
   ];
-  const MODE_LABEL = { rail: "Scenic rail", water: "Lake crossing", bike: "E-bike", road: "Private transfer" };
-  const TOPO_URL = "https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json";
+  const MODE_LABEL = { rail: "Rail", water: "Lake crossing", bike: "E-bike", road: "Private transfer",
+    move: "Rail \u00B7 Boat \u00B7 E-bike \u00B7 On foot", travel: "Rail \u00B7 Road \u00B7 Lake" };
+  const GEO_URL = "assets/switzerland-map.json";
   let topoPromise = null;
   function loadTopo() {
-    if (!topoPromise) topoPromise = d3.json(TOPO_URL).then(t => topojson.feature(t, t.objects.countries));
+    if (!topoPromise) topoPromise = d3.json(GEO_URL);
     return topoPromise;
   }
   function arcPath(a, b, bow) {
@@ -46,7 +52,7 @@
     const [failed, setFailed] = React.useState(false);
     React.useEffect(() => {
       let alive = true;
-      if (!window.d3 || !window.topojson) { setFailed(true); return; }
+      if (!window.d3) { setFailed(true); return; }
       loadTopo().then(fc => { if (alive) setGeo(fc); }).catch(() => { if (alive) setFailed(true); });
       return () => { alive = false; };
     }, []);
@@ -57,22 +63,33 @@
 
     const swiss = geo.features.find(f => f.properties && f.properties.name === "Switzerland");
     if (!swiss) return React.createElement("div", { className: "st-rmap-fallback" }, known.join(" \u00B7 "));
-    const proj = d3.geoMercator().fitExtent([[62, 58], [W - 62, H - 58]], swiss);
+    /* Compact routes (e.g. Summer Explorer) zoom in around the stops; wide routes show all of Switzerland. */
+    const lons = known.map(s => PLACES[s].c[0]), lats = known.map(s => PLACES[s].c[1]);
+    const span = Math.max(Math.max(...lons) - Math.min(...lons), Math.max(...lats) - Math.min(...lats));
+    let frame = swiss;
+    if (span < 1.5) {
+      const pad = Math.max(0.6, span * 0.65);
+      const x0 = Math.min(...lons) - pad, x1 = Math.max(...lons) + pad, y0 = Math.min(...lats) - pad * 0.6, y1 = Math.max(...lats) + pad * 0.6;
+      frame = { type: "Feature", geometry: { type: "Polygon", coordinates: [[[x0, y0], [x0, y1], [x1, y1], [x1, y0], [x0, y0]]] } };
+    }
+    const proj = d3.geoMercator().fitExtent([[62, 58], [W - 62, H - 58]], frame);
     const geoPath = d3.geoPath(proj);
-    const around = geo.features.filter(f => f.properties && ["France", "Germany", "Italy", "Austria"].indexOf(f.properties.name) >= 0);
+    const around = geo.features.filter(f => f.properties && ["France", "Germany", "Italy", "Austria", "Liechtenstein"].indexOf(f.properties.name) >= 0);
     const pts = known.map(s => ({ name: s, xy: proj(PLACES[s].c), meta: PLACES[s] }));
     const segs = [];
     for (let i = 0; i < pts.length - 1; i++) {
       const mode = (legs && legs[i]) || "rail";
-      segs.push({ mode, d: arcPath(pts[i].xy, pts[i + 1].xy, 0.13) });
+      /* The closing leg back to the start bows wider so it doesn't run through the stops. */
+      const closing = i === pts.length - 2 && pts.length > 3 && pts[i + 1].name === pts[0].name;
+      segs.push({ mode, d: arcPath(pts[i].xy, pts[i + 1].xy, closing ? 0.24 : 0.13) });
     }
     const uniq = [];
     pts.forEach(p => { if (!uniq.some(u => u.name === p.name)) uniq.push(p); });
     const usedModes = [];
     segs.forEach(s => { if (usedModes.indexOf(s.mode) < 0) usedModes.push(s.mode); });
-    const dash = { rail: null, water: "5 7", bike: "1.5 6", road: "9 6" };
+    const dash = { rail: null, water: "5 7", bike: "1.5 6", road: "9 6", move: "1.5 6", travel: null };
 
-    return React.createElement("svg", { className: "st-rmap", viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": "Route map: " + known.join(", ") },
+    return React.createElement("svg", { className: "st-rmap", viewBox: "0 0 " + W + " " + H, overflow: "hidden", role: "img", "aria-label": "Route map: " + known.join(", ") },
       React.createElement("g", { className: "st-rmap-around" },
         around.map(f => React.createElement("path", { key: f.properties.name, d: geoPath(f) })),
         NEIGHBOURS.map(n => {
@@ -86,10 +103,10 @@
         uniq.map(p => React.createElement(React.Fragment, { key: p.name },
           React.createElement("circle", { cx: p.xy[0], cy: p.xy[1], r: 5.5, className: "st-rmap-dot" }),
           React.createElement("text", { x: p.xy[0] + (p.meta.anchor === "end" ? -12 : 12), y: p.xy[1] + p.meta.dy, textAnchor: p.meta.anchor, className: "st-rmap-label" }, p.name.toUpperCase())))),
-      React.createElement("g", { className: "st-rmap-legend", transform: "translate(28," + (H - 26 - (usedModes.length - 1) * 24) + ")" },
+      React.createElement("g", { className: "st-rmap-legend", transform: "translate(28," + (H - 26 - (usedModes.length - 1) * 30) + ")" },
         usedModes.map((m, i) => React.createElement(React.Fragment, { key: m },
-          React.createElement("line", { x1: 0, y1: i * 24, x2: 34, y2: i * 24, className: "st-rmap-leg " + m, strokeDasharray: dash[m] || undefined }),
-          React.createElement("text", { x: 46, y: i * 24 + 4, className: "st-rmap-legend-label" }, (MODE_LABEL[m] || m).toUpperCase())))));
+          React.createElement("line", { x1: 0, y1: i * 30, x2: 34, y2: i * 30, className: "st-rmap-leg " + m, strokeDasharray: dash[m] || undefined }),
+          React.createElement("text", { x: 46, y: i * 30 + 5, className: "st-rmap-legend-label" }, (MODE_LABEL[m] || m).toUpperCase())))));
   }
 
   window.RouteMap = RouteMap;

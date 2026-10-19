@@ -25,14 +25,16 @@ function PlanPage({ c, journey, season }) {
 }
 
 function JourneysIntro({ c, season, onSeason }) {
-  const s = SEASONS.find(x => x.id === season) || SEASONS[0];
+  const base = SEASONS.find(x => x.id === season) || SEASONS[0];
+  const alt = season === "winter" && (WINTER_MODE === "on-request" ? WINTER_ALT.onRequest : WINTER_MODE === "signature-only" ? WINTER_ALT.signatureOnly : null);
+  const s = alt ? Object.assign({}, base, alt) : base;
   return React.createElement("section", { className: "st-jintro" }, React.createElement("div", { className: "st-wrap st-jintro-in" },
     React.createElement(Reveal, { className: "st-section-head", style: { maxWidth: 820 } },
       React.createElement(Eyebrow, null, "Curated journeys"),
       React.createElement("h1", { className: "st-section-title" }, s.title),
       React.createElement("p", { className: "st-lead", style: { maxWidth: 620 } }, s.lead),
       React.createElement("p", { className: "st-principle" }, c.journeysPrinciple)),
-    React.createElement(SeasonSwitch, { season, onSeason })));
+    WINTER_MODE !== "hidden" && React.createElement(SeasonSwitch, { season, onSeason })));
 }
 
 function JourneysPage({ c, onNav, season = "summer", onSeason }) {
