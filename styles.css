@@ -57,7 +57,7 @@ img { display: block; }
 .st-hero-lead { font-weight: 300; font-size: calc(clamp(1rem, 1.5vw, 1.2rem) * var(--scale)); color: rgba(246,241,232,0.94); max-width: 440px; line-height: 1.55; margin: 0; }
 .st-hero-cta { margin-top: 8px; }
 
-/* ---- More than a trip ---- */
+/* ---- Meaning band (Home) ---- */
 .st-meaning { padding: clamp(88px, 11vw, 160px) 0; }
 .st-meaning-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
 .st-meaning-quote { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: calc(clamp(1.8rem, 3.6vw, 2.9rem) * var(--scale)); line-height: 1.14; color: var(--ink); margin: 0; }
@@ -254,7 +254,7 @@ img { display: block; }
 .st-exincl-not p { font-size: 14.5px; line-height: 1.65; color: var(--fg-3); margin: 0; }
 .st-exfinal { padding: clamp(64px,9vw,112px) 0; }
 .st-exfinal-in { max-width: 640px; display: flex; flex-direction: column; gap: 18px; align-items: flex-start; }
-.st-exfinal-support { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--fg-3); margin: 4px 0 0; }
+.st-exfinal-support { font-family: var(--font-serif); font-style: italic; font-size: 16px; color: var(--fg-2); margin: 4px 0 0; }
 
 /* ---- Explorer: compressed journey map ---- */
 .st-exjourney { padding: clamp(64px,9vw,112px) 0; background: var(--paper-cool); }
@@ -311,6 +311,7 @@ img { display: block; }
 .st-cta { padding: clamp(72px, 10vw, 120px) 0; background: var(--paper-cool); }
 .st-cta.dark { background: var(--surface-dark); color: var(--paper); }
 .st-cta.dark .st-section-title { color: var(--paper); }
+.st-cta.dark .st-lead { color: rgba(246,241,232,0.88); }
 .st-cta-in { display: flex; flex-direction: column; gap: 18px; max-width: 640px; }
 
 /* ---- Contact form primitives ---- */
@@ -592,7 +593,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .st-exvalue-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: calc(clamp(1.5rem,2.6vw,2rem) * var(--scale)); line-height: 1.05; color: var(--ink); margin: 6px 0 0; }
 .st-exvalue-list { margin-top: 22px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 clamp(24px,3vw,40px); }
 .st-exvalue-list .st-exincl-item { font-size: 14.5px; padding: 10px 0; }
-.st-exvalue-not { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--fg-3); max-width: 62ch; }
+.st-exvalue-not { margin: 20px 0 0; font-size: 13.5px; line-height: 1.6; color: var(--fg-2); max-width: 62ch; }
 .st-exvalue-not span { color: var(--ink); }
 .st-exvalue-price { background: var(--surface-dark); color: var(--paper); padding: clamp(28px,3vw,40px); display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
 .st-exvalue-amount { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: calc(clamp(1.7rem,3vw,2.3rem) * var(--scale)); line-height: 1.04; color: var(--paper); margin: 8px 0 0; }
@@ -628,7 +629,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 760px) { .st-exhero .st-hero-photo img { object-position: var(--pos-m) !important; } }
 
 /* Winter on request (WINTER_MODE = "on-request") */
-.st-winter-req { padding: 8px 0 clamp(52px,7vw,84px); }
+.st-winter-req { padding: 8px 0 clamp(52px,7vw,84px); display: flex; flex-wrap: wrap; align-items: center; gap: 18px 32px; }
 .st-jcompare-grid.is-single { grid-template-columns: minmax(0, 440px); }
 /* Route map legibility on phones: the SVG scales to ~40%, so labels are set larger in SVG units. */
 @media (max-width: 560px) {
@@ -638,3 +639,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .st-rmap-leg { stroke-width: 3; }
   .st-rmap-dot { r: 8px; }
 }
+/* Legal pages + footer legal links (Oct 2026) */
+.st-legal { padding: 8px 0 clamp(72px,9vw,120px); }
+.st-legal-body { max-width: 62ch; display: flex; flex-direction: column; gap: 16px; padding-top: clamp(24px,3vw,36px); border-top: 1px solid var(--line); }
+.st-legal-body p, .st-legal-list { margin: 0; font-size: 16px; line-height: 1.7; color: var(--fg-2); }
+.st-legal-h { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 22px; line-height: 1.1; color: var(--ink); margin: 20px 0 0; }
+.st-legal-sub { font-family: var(--font-sans); font-weight: 500; font-size: 16px; color: var(--ink); margin: 6px 0 0; }
+.st-legal-list { padding-left: 1.2em; display: flex; flex-direction: column; gap: 6px; }
+.st-legal-list strong { font-weight: 500; color: var(--ink); }
+.st-footer-legal { display: inline-flex; flex-wrap: wrap; gap: 6px 20px; }
+.st-footer-legal a { color: rgba(246,241,232,0.7); }
+.st-footer-legal a:hover { color: var(--paper); }
+.st-form-consent { margin: 0; font-size: 13px; line-height: 1.55; color: rgba(246,241,232,0.75); max-width: 52ch; }
+.st-form-consent a { color: var(--paper); text-decoration: underline; text-underline-offset: 2px; }
+/* Sample-journey framing (Oct 2026) */
+.st-exhero-tag { margin: 0; font-family: var(--font-sans); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,241,232,0.88); }
+.st-jcol-tag { margin: 0; font-family: var(--font-sans); font-weight: 500; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-2); }
+.st-exroute-req { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
+.st-shaped-line { color: var(--paper); }

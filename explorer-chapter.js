@@ -7,6 +7,7 @@ function ExHero({ d, onNav, journey, season }) {
     React.createElement("div", { className: "st-exhero-inner" },
       React.createElement(Eyebrow, { className: "st-hero-eyebrow" }, d.eyebrow),
       d.journey && React.createElement("p", { className: "st-exhero-journey" }, d.journey),
+      d.tag && React.createElement("p", { className: "st-exhero-tag" }, d.tag),
       React.createElement("h1", { className: "st-exhero-title" }, d.title),
       React.createElement("p", { className: "st-exhero-lead" }, d.lead),
       d.lead2 && React.createElement("p", { className: "st-exhero-lead st-exhero-lead2" }, d.lead2),
@@ -35,6 +36,7 @@ function ExRoute({ d }) {
         React.createElement("div", { className: "st-exroute-facts" },
           React.createElement("span", null, d.duration),
           React.createElement("span", null, d.modes)),
+        d.requirements && React.createElement("p", { className: "st-exroute-req" }, d.requirements),
         React.createElement("p", { className: "st-exroute-note" }, d.note)))));
 }
 
@@ -63,7 +65,7 @@ function ExStages({ stages, heading }) {
 }
 
 function valueFromConversion(c) {
-  return { title: "The journey, taken care of.",
+  return { title: "A journey like this can include",
     items: c.included.split(" \u00B7 "),
     notIncluded: c.notIncluded.replace(/^Not included:\s*/i, ""),
     price: { eyebrow: c.eyebrow, amount: c.amount, headline: c.headline, meta: c.duration, basis: c.basis, note: c.note, cta: c.cta } };
@@ -73,7 +75,7 @@ function ExValue({ d, onNav, journey, season }) {
   const p = d.price || {};
   return React.createElement("section", { className: "st-exvalue" }, React.createElement("div", { className: "st-wrap st-exvalue-grid" },
     React.createElement(Reveal, { className: "st-exvalue-incl" },
-      React.createElement(Eyebrow, null, "What's included"),
+      React.createElement(Eyebrow, null, "Sample journey"),
       React.createElement("h2", { className: "st-exvalue-title" }, d.title),
       React.createElement("div", { className: "st-exvalue-list" }, d.items.map(it => React.createElement("p", { key: it, className: "st-exincl-item" }, it))),
       React.createElement("p", { className: "st-exvalue-not" },
@@ -85,6 +87,7 @@ function ExValue({ d, onNav, journey, season }) {
       p.basis && React.createElement("p", { className: "st-exvalue-note" }, p.basis),
       p.note && React.createElement("p", { className: "st-exvalue-note" }, p.note),
       React.createElement("p", { className: "st-exvalue-note" }, "Enquiring is free and commits you to nothing."),
+      React.createElement("p", { className: "st-exvalue-note st-shaped-line" }, "Every journey is shaped with you. Everything is confirmed in a written proposal before anything is booked."),
       React.createElement("div", { className: "st-exvalue-cta" },
         React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, p.cta)))));
 }
@@ -146,6 +149,7 @@ function ExPrice({ d, onNav, journey, season }) {
     d.meta && React.createElement("p", { className: "st-chprice-from" }, d.meta),
     d.basis && React.createElement("p", { className: "st-chprice-note" }, d.basis),
     d.note && React.createElement("p", { className: "st-chprice-note" }, d.note),
+    React.createElement("p", { className: "st-chprice-note st-shaped-line" }, "Every journey is shaped with you. Everything is confirmed in a written proposal before anything is booked."),
     d.cta && onNav && React.createElement("div", { className: "st-chprice-cta" },
       React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", journey, season) }, d.cta))));
 }

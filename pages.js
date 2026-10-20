@@ -105,6 +105,18 @@ function AboutPage({ c, onNav }) {
         React.createElement("a", { className: "ab-cta-mail", href: "mailto:" + EMAIL }, EMAIL)))));
 }
 
+function LegalPage({ d }) {
+  const lineBreaks = arr => arr.map((l, i) => React.createElement(React.Fragment, { key: i }, i > 0 && React.createElement("br", null), l));
+  return React.createElement(React.Fragment, null,
+    React.createElement(PageIntro, { eyebrow: d.eyebrow, title: d.title, lead: d.updated }),
+    React.createElement("section", { className: "st-legal" }, React.createElement("div", { className: "st-wrap" },
+      React.createElement("div", { className: "st-legal-body" }, d.blocks.map((b, i) =>
+        b.h ? React.createElement("h2", { key: i, className: "st-legal-h" }, b.h)
+        : b.sub ? React.createElement("h3", { key: i, className: "st-legal-sub" }, b.sub)
+        : b.list ? React.createElement("ul", { key: i, className: "st-legal-list" }, b.list.map(([k, v]) => React.createElement("li", { key: k }, React.createElement("strong", null, k), v)))
+        : React.createElement("p", { key: i }, lineBreaks(b.p)))))));
+}
+
 function ContactPage({ c, onNav }) {
   return React.createElement(React.Fragment, null,
     React.createElement(PageIntro, { eyebrow: c.contactEyebrow, title: c.contactTitle }),
@@ -153,4 +165,4 @@ function ChapterPage({ id, onNav, season }) {
   if (id === "signature") return React.createElement(SignaturePage, { onNav, season });
   return React.createElement(ExplorerPage, { onNav, season });
 }
-Object.assign(window, { HomePage, JourneysPage, ChapterPage, ExplorerPage, BoutiquePage, SignaturePage, AboutPage, AboutFounder, ContactPage, PlanPage, PageIntro });
+Object.assign(window, { LegalPage, HomePage, JourneysPage, ChapterPage, ExplorerPage, BoutiquePage, SignaturePage, AboutPage, AboutFounder, ContactPage, PlanPage, PageIntro });

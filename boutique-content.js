@@ -6,6 +6,7 @@ const BOUTIQUE_CONTENT = {
       photoPosMobile: "62% 50%",
       eyebrow: "Summer",
       journey: "Boutique",
+      tag: "Sample journey \u00B7 Shaped with you",
       title: "Fewer places. More depth.",
       lead: "Two nights in Appenzell, two on Lake Lucerne, two in Zermatt and a last night in Zürich. Time to stay, and to meet the people who know each place.",
       meta: ["8 days · 7 nights", "Pricing shaped around your journey"],
@@ -65,6 +66,7 @@ const BOUTIQUE_CONTENT = {
       align: "center",
       eyebrow: "Winter",
       journey: "Boutique",
+      tag: "Sample journey \u00B7 Shaped with you",
       title: "Discover Switzerland through its winter character.",
       lead: "Travel between two of Switzerland's most distinctive Alpine worlds and discover them through the people, places, food, architecture and traditions that give each one its character.",
       meta: ["8 days \u00B7 7 nights", "Pricing shaped around your journey"],
@@ -124,7 +126,7 @@ const BOUTIQUE_CONTENT = {
       closing: "Stay longer. Look closer."
     },
     included: {
-      title: "The journey, taken care of.",
+      title: "A journey like this can include",
       items: [
         "7 nights in carefully selected accommodation",
         "Breakfast",
@@ -142,8 +144,6 @@ const BOUTIQUE_CONTENT = {
     },
     price: {
       eyebrow: "Boutique",
-      /* When the price is validated, set amount: "From CHF X,XXX per person" \u2014 it replaces
-         the headline below with no structural change. Leave amount unset until then. */
       amount: "",
       headline: "Pricing shaped around your journey",
       meta: "8 days \u00B7 7 nights",

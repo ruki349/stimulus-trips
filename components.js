@@ -103,7 +103,9 @@ function Footer({ onNav }) {
           React.createElement("a", { href: "mailto:" + EMAIL }, EMAIL),
           React.createElement("a", { href: waLink(), target: "_blank", rel: "noopener" }, "WhatsApp \u00B7 ", WHATSAPP.display)))),
     React.createElement("div", { className: "st-footer-base" },
-      React.createElement("span", null, "\u00A9 2026 Stimulus Trips"),
+      React.createElement("span", { className: "st-footer-legal" }, "\u00A9 2026 Stimulus Trips",
+        React.createElement("a", { href: "/legal-notice", onClick: e => { e.preventDefault(); onNav("legal"); } }, "Legal notice"),
+        React.createElement("a", { href: "/privacy", onClick: e => { e.preventDefault(); onNav("privacy"); } }, "Privacy policy")),
       React.createElement("span", null, "Z\u00FCrich \u00B7 Switzerland")));
 }
 function scrollToChapter(id) {

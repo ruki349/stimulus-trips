@@ -9,6 +9,8 @@ function pathFor(view, id, season) {
   if (view === "chapter") return "/" + id + q;
   if (view === "about") return "/about";
   if (view === "contact") return "/contact";
+  if (view === "legal") return "/legal-notice";
+  if (view === "privacy") return "/privacy";
   if (view === "plan") { const qs = []; if (id) qs.push("journey=" + id); if (season === "winter" || season === "summer") qs.push("season=" + season); return "/plan-a-journey" + (qs.length ? "?" + qs.join("&") : ""); }
   return "/";
 }
@@ -30,6 +32,8 @@ function parsePath(pathname, search) {
   if (m) return { view: "chapter", id: m[1], season: seasonFor("chapter", m[1], season) };
   if (path === "/about") return { view: "about" };
   if (path === "/contact") return { view: "contact" };
+  if (path === "/legal-notice") return { view: "legal" };
+  if (path === "/privacy") return { view: "privacy" };
   if (path === "/plan-a-journey") {
     const j = (sp.get("journey") || "").toLowerCase();
     return { view: "plan", id: JOURNEY_IDS.indexOf(j) > -1 ? j : "", season: SEASON_IDS.indexOf(se) > -1 ? se : "" };
@@ -44,6 +48,8 @@ const META = {
   signature: ["Signature — A journey written with you | Stimulus Trips", "A Swiss journey designed entirely around your interests, your people and your reason for travelling.", "assets/journeys-signature.jpg"],
   about: ["About Stimulus — A network of people | Stimulus Trips", "We connect remarkable people to create remarkable journeys through Switzerland.", "assets/moment-oberalp.jpg"],
   contact: ["Contact | Stimulus Trips", "Talk to Stimulus Trips: hi@stimulustrips.com or WhatsApp +41 76 237 33 74.", "assets/signature-hero.jpg"],
+  legal: ["Legal notice | Stimulus Trips", "Legal notice for stimulustrips.com: Stimulus Trips, sole proprietorship of Alejandro Ruiz Kissling, Zürich, Switzerland.", "assets/signature-hero.jpg"],
+  privacy: ["Privacy policy | Stimulus Trips", "How Stimulus Trips handles personal data sent through this website, under the Swiss Federal Act on Data Protection (FADP).", "assets/signature-hero.jpg"],
   plan: ["Plan a journey | Stimulus Trips", "Tell us about the journey you have in mind and we'll start the conversation.", "assets/signature-hero.jpg"]
 };
 function setMeta(sel, attr, value) {
@@ -92,6 +98,8 @@ function App() {
       view === "chapter" && React.createElement(ChapterPage, { id: route.id, onNav: nav, season: route.season || "summer" }),
       view === "about" && React.createElement(AboutPage, { c: COPY, onNav: nav }),
       view === "contact" && React.createElement(ContactPage, { c: COPY, onNav: nav }),
+      view === "legal" && React.createElement(LegalPage, { d: LEGAL.notice }),
+      view === "privacy" && React.createElement(LegalPage, { d: LEGAL.privacy }),
       view === "plan" && React.createElement(PlanPage, { c: COPY, journey: route.id, season: route.season })),
     React.createElement(Footer, { onNav: nav }),
     React.createElement(WhatsAppFab, null),

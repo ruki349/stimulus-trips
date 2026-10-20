@@ -4,6 +4,7 @@ const EXPLORER_CONTENT = {
       photo: "assets/chapter-explorer.jpg",
       eyebrow: "Summer",
       journey: "Explorer",
+      tag: "Sample journey \u00B7 Shaped with you",
       title: "Discover Switzerland through movement",
       lead: "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. The way between places is part of the journey.",
       meta: ["8 days · 7 nights", "Pricing shaped around your journey"],
@@ -18,6 +19,7 @@ const EXPLORER_CONTENT = {
       legs: ["rail", "move", "move", "move", "rail"],
       duration: "8 days · 7 nights",
       modes: "Rail · Boat · E-bike · On foot",
+      requirements: "Moderate fitness. Some stages by e-bike; full requirements are shared with your proposal.",
       note: "Not a cycling tour. The route is the same for everyone. How much of it you ride, walk or travel by rail and boat is shaped around you."
     },
     stages: [
@@ -62,6 +64,7 @@ const EXPLORER_CONTENT = {
       photoPos: "30% 100%",
       eyebrow: "Winter",
       journey: "Explorer",
+      tag: "Sample journey \u00B7 Shaped with you",
       title: "Discover Switzerland through winter movement.",
       lead: "Seven nights in Zermatt, most of them spent on the mountain. The days on snow follow the weather, the intensity follows you, and the rest of the week belongs to the village and the people who live beneath the Matterhorn.",
       meta: ["8 days \u00B7 7 nights", "Pricing shaped around your journey"],
@@ -121,7 +124,7 @@ const EXPLORER_CONTENT = {
       closing: "The place is fixed. The intensity is not."
     },
     included: {
-      title: "The journey, taken care of.",
+      title: "A journey like this can include",
       items: [
         "7 nights in carefully selected accommodation in Zermatt",
         "Breakfast",

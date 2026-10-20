@@ -4,6 +4,7 @@ const SIGNATURE = {
     photoPos: "50% 80%",
     eyebrow: "Summer",
     journey: "Signature",
+    tag: "Shaped with you",
     title: "A journey that doesn't exist yet",
     lead: "No route, no fixed days, no template. Signature starts with a conversation and ends with a journey that has been written for one group of travellers only.",
     meta: ["Duration and shape defined around you.", "Pricing created around your journey"],
@@ -40,7 +41,6 @@ const SIGNATURE = {
   },
   pricing: {
     eyebrow: "Signature",
-    /* Signature is created individually — no starting price is shown. */
     amount: "",
     headline: "Pricing created around your journey",
     meta: "Duration and shape defined around you.",

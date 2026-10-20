@@ -40,19 +40,19 @@ const SEASONS = [
 ];
 const JOURNEY_COMPARE = {
   summer: [
-    { id: "explorer", name: "Explorer", photo: "assets/chapter-explorer.jpg",
+    { id: "explorer", name: "Explorer", photo: "assets/chapter-explorer.jpg", tag: "Sample journey \u00B7 Shaped with you",
       prop: "Discover Switzerland through movement",
       route: "Lucerne \u00B7 Lungern \u00B7 Brienz \u00B7 Lauterbrunnen",
       desc: "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. Not a cycling tour.",
       includes: ["Rail", "Boat", "E-bike", "On foot", "Selected stays", "Stimulus support"],
       quote: "\u201CThe route is fixed. The intensity is not.\u201D" },
-    { id: "boutique", name: "Boutique", photo: "assets/hero-photo.jpg",
+    { id: "boutique", name: "Boutique", photo: "assets/hero-photo.jpg", tag: "Sample journey \u00B7 Shaped with you",
       prop: "Fewer places. More depth.",
       route: "Appenzell \u00B7 Lake Lucerne \u00B7 Zermatt \u00B7 Z\u00FCrich",
       desc: "Eight days, two nights in each place. Time with the people who know it, and no cycling between stages.",
       includes: ["Stays with character", "Local hosts", "Food and provenance", "Time on the lake", "Stimulus support"],
       quote: "\u201CStay longer. Look closer.\u201D" },
-    { id: "signature", name: "Signature", photo: "assets/journeys-signature.jpg",
+    { id: "signature", name: "Signature", photo: "assets/journeys-signature.jpg", tag: "Shaped with you",
       prop: "Switzerland, shaped around you",
       route: "No fixed route",
       desc: "For travellers whose journey begins with their own story, not a predefined route. Your people, your interests, your occasion, your time.",
@@ -88,11 +88,12 @@ const JOURNEY_COMPARE = {
    "hidden"         = no Summer | Winter selector; every ?season=winter URL falls back to summer
    "on-request"     = selector stays; Winter shows one panel that leads to the form (season=winter)
    "signature-only" = selector stays; Winter shows only Signature; Explorer/Boutique are summer-only */
-const WINTER_MODE = "current";
+const WINTER_MODE = "on-request";
 const WINTER_ALT = {
-  onRequest: { title: "Winter, shaped on request",
-    lead: "Our winter journeys are not published yet. Tell us when you would like to travel and we'll shape one with you.",
-    cta: "Plan a winter journey \u2192" },
+  onRequest: { title: "Winter journeys on request",
+    lead: "We don't publish a winter route. Tell us when you would like to travel and we'll shape a winter journey with you.",
+    cta: "Plan a winter journey \u2192",
+    alt: "Or start with Signature \u2192" },
   signatureOnly: { title: "Winter, shaped around you",
     lead: "Explorer and Boutique are summer journeys. In winter, every journey is written with you." }
 };
@@ -122,9 +123,9 @@ const COPY = {
   heroEyebrow: "Switzerland",
   heroTitle: ["Feel", "Switzerland"],
   heroLead: "Curated journeys shaped by locals. Discover Switzerland through its people, landscapes and stories.",
-  moreEyebrow: "More than a trip",
+  moreEyebrow: "How we see Switzerland",
   moreQuote: "Switzerland is more than a destination. It is a country best understood through its landscapes, its people and the stories that connect them.",
-  moreBody: ["Stimulus is a network of people creating extraordinary journeys through Switzerland.", "Every journey is shaped to help you experience the country in a more personal, authentic and meaningful way."],
+  moreBody: ["Stimulus is a network of people creating extraordinary journeys through Switzerland.", "Every journey is shaped so you experience the country through its people, its landscapes and its rhythm."],
   journeysEyebrow: "Curated journeys",
   journeysTitle: ["Curated journeys for", "every way of travelling"],
   journeysLead: "Explorer, Boutique, Signature — three ways to experience Switzerland.",
@@ -138,7 +139,7 @@ const COPY = {
   escapeCta: "Start a conversation \u2192",
   placeEyebrow: "Places worth experiencing",
   placeTitle: ["Rooted in Zurich", "At home in the mountains"],
-  placeBody: "We know which trail is empty at golden hour, which terrace catches the last light, and which morning the mountain shows itself. More places, after our expedition.",
+  placeBody: "We know which trail is empty at golden hour, which terrace catches the last light, and which morning the mountain shows itself.",
   finalEyebrow: "Plan a journey",
   finalTitle: ["Ready to start?"],
   finalLead: "Tell us a little about the journey you have in mind. We'll take it from there.",
@@ -153,5 +154,61 @@ const COPY = {
   contactTitle: ["Let's talk"],
   contactLead: ""
 };
+/* Legal pages (/legal-notice, /privacy). Text approved 19 Oct 2026 — keep wording exact.
+   Blocks: { h } heading · { sub } sub-heading · { p: [lines] } paragraph (lines join with <br>) · { list: [[bold, rest]] } */
+const LEGAL = {
+  notice: {
+    eyebrow: "Legal",
+    title: "Legal notice",
+    blocks: [
+      { p: ["Stimulus Trips", "Sole proprietorship of Alejandro Ruiz Kissling", "Grossmannstrasse 33", "8049 Zürich", "Switzerland"] },
+      { p: ["Email: hi@stimulustrips.com", "Phone / WhatsApp: +41 76 237 33 74"] },
+      { p: ["Responsible for content: Alejandro Ruiz Kissling"] },
+      { h: "Liability for content" },
+      { p: ["We take care to keep the information on this website accurate and up to date. Journey descriptions are illustrative. Routes, services, partners and prices are confirmed only in a written proposal before anything is booked."] },
+      { h: "Links to other websites" },
+      { p: ["This website contains links to third-party websites. We have no influence on their content and accept no responsibility for it."] },
+      { h: "Copyright" },
+      { p: ["All texts, photographs and graphics on this website belong to Stimulus Trips or are used with permission. Any use requires our prior written consent."] }
+    ]
+  },
+  privacy: {
+    eyebrow: "Legal",
+    title: "Privacy policy",
+    updated: "Last updated: 1 November 2026",
+    blocks: [
+      { p: ["This policy explains what personal data Stimulus Trips collects through this website, why, and what rights you have. It is based on the Swiss Federal Act on Data Protection (FADP)."] },
+      { h: "1. Who is responsible" },
+      { p: ["Stimulus Trips, sole proprietorship of Alejandro Ruiz Kissling, Grossmannstrasse 33, 8049 Zürich, Switzerland.", "Questions about your data: hi@stimulustrips.com"] },
+      { h: "2. What we collect" },
+      { sub: "When you send an enquiry (“Plan a Journey”)" },
+      { p: ["The details you enter in the form: your name, email address, where you are travelling from, when you would like to travel and whether your dates are flexible, the number of travellers, the journey and season you are interested in, and your message.", "We use these details only to reply to you, to prepare a conversation and, if you wish, a proposal."] },
+      { sub: "When you write to us by email or WhatsApp" },
+      { p: ["Your contact details and the content of your messages, for the same purpose."] },
+      { sub: "When you visit the website" },
+      { p: ["Our hosting provider automatically processes technical data needed to deliver the site securely, such as your IP address, browser type and the time of access.", "We measure visits with Plausible Analytics, which does not use cookies and does not collect personal data that identifies you. We see only aggregated figures, such as page views and countries."] },
+      { p: ["We do not use advertising or tracking cookies."] },
+      { h: "3. Service providers we use" },
+      { p: ["We share data only with providers that help us run this website and reply to you:"] },
+      { list: [
+        ["Netlify", " (USA): website hosting and receipt of form submissions."],
+        ["Google Workspace", " (USA): our email (hi@stimulustrips.com)."],
+        ["Plausible Analytics", " (EU): cookie-free visitor statistics."],
+        ["WhatsApp / Meta", " (USA/Ireland): only if you choose to contact us on WhatsApp."],
+        ["Google Fonts", " (USA): fonts loaded from Google servers."],
+        ["unpkg", " (USA): a content delivery network that serves website code."]
+      ] },
+      { p: ["We do not sell your data and do not share it for marketing purposes."] },
+      { h: "4. Data outside Switzerland" },
+      { p: ["Some providers process data in the USA or the EU. Where the destination country does not offer an adequate level of data protection under Swiss law, we rely on recognised safeguards such as the Swiss–US Data Privacy Framework or standard contractual clauses."] },
+      { h: "5. How long we keep your data" },
+      { p: ["We keep enquiries and correspondence for as long as needed to respond and to plan a possible journey. If no journey is booked, we delete them after 24 months. If you book a journey, we keep the related records as long as required by Swiss law (generally 10 years for accounting records)."] },
+      { h: "6. Your rights" },
+      { p: ["You can ask us at any time to tell you what data we hold about you, to correct it, to delete it, or to stop using it. Write to hi@stimulustrips.com. We will reply within 30 days.", "You may also contact the Swiss Federal Data Protection and Information Commissioner (FDPIC)."] },
+      { h: "7. Changes" },
+      { p: ["We may update this policy. The current version is always published on this page."] }
+    ]
+  }
+};
 const EMAIL = "hi@stimulustrips.com";
-Object.assign(window, { WINTER_MODE, WINTER_ALT, JOURNEYS, JOURNEY_OVERVIEW, SEASONS, JOURNEY_COMPARE, FIT, WHY, COPY, VALUES, PH, EMAIL });
+Object.assign(window, { LEGAL, WINTER_MODE, WINTER_ALT, JOURNEYS, JOURNEY_OVERVIEW, SEASONS, JOURNEY_COMPARE, FIT, WHY, COPY, VALUES, PH, EMAIL });

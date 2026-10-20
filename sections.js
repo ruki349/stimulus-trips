@@ -99,7 +99,8 @@ function SeasonSwitch({ season, onSeason }) {
 function JourneyCompare({ season, onNav }) {
   if (season === "winter" && WINTER_MODE === "on-request") return React.createElement("section", { className: "st-jcompare", "data-screen-label": "Journeys \u00B7 Winter" },
     React.createElement("div", { className: "st-wrap" }, React.createElement("div", { className: "st-winter-req" },
-      React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", null, "winter") }, WINTER_ALT.onRequest.cta))));
+      React.createElement(Button, { variant: "lime", onClick: () => onNav("plan", null, "winter") }, WINTER_ALT.onRequest.cta),
+      React.createElement(TextLink, { href: "/signature", onClick: () => onNav("chapter", "signature") }, WINTER_ALT.onRequest.alt))));
   const all = JOURNEY_COMPARE[season] || JOURNEY_COMPARE.summer;
   const cols = season === "winter" && WINTER_MODE === "signature-only" ? all.filter(j => j.id === "signature") : all;
   const seasonLabel = (SEASONS.find(s => s.id === season) || SEASONS[0]).label;
@@ -112,6 +113,7 @@ function JourneyCompare({ season, onNav }) {
             React.createElement("div", { className: "st-jcol-body" },
               React.createElement(Eyebrow, { className: "st-jcol-season" }, seasonLabel),
               React.createElement("h2", { className: "st-jcol-name" }, j.name),
+              j.tag && React.createElement("p", { className: "st-jcol-tag" }, j.tag),
               React.createElement("p", { className: "st-jcol-prop" }, j.prop),
               React.createElement("p", { className: "st-jcol-route" }, j.route),
               React.createElement("div", { className: "st-jcol-descs" },
@@ -239,7 +241,8 @@ function PlanForm({ journey, season, sent, onSent }) {
       field("journey", "Which journey are you considering?", React.createElement("select", Object.assign({ defaultValue: preset }, inputProps("journey")), ["Explorer", "Boutique", "Signature", "I'm not sure yet"].map(o => React.createElement("option", { key: o, value: o }, o)))),
       field("remarkable", "What would make this journey remarkable for you?", React.createElement("textarea", Object.assign({ rows: "5", placeholder: "An occasion, a landscape, a pace, an interest \u2014 anything is enough to begin." }, inputProps("remarkable")))),
       status === "error" && React.createElement("p", { className: "st-field-err", role: "alert" }, "We couldn\u2019t send that from here. Please try again, or write to us at ", React.createElement("a", { href: "mailto:" + EMAIL, style: { textDecoration: "underline" } }, EMAIL), "."),
-      React.createElement(Button, { variant: "lime" }, status === "sending" ? "Sending\u2026" : "Start the conversation \u2192"))));
+      React.createElement(Button, { variant: "lime" }, status === "sending" ? "Sending\u2026" : "Start the conversation \u2192"),
+      React.createElement("p", { className: "st-form-consent" }, "By sending this form, you agree that we use your details to reply to your enquiry. See our ", React.createElement("a", { href: "/privacy" }, "Privacy policy"), "."))));
 }
 
 function PlanThanks() {
