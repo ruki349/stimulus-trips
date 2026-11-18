@@ -12,6 +12,7 @@ function HomePage({ c, onNav }) {
     React.createElement(MeaningBand, { c }),
     React.createElement(WhyStimulus, { onNav }),
     React.createElement(Spotlight, { c }),
+    React.createElement(ChefSeriesSection, null),
     React.createElement(CTABand, { eyebrow: c.finalEyebrow, title: c.finalTitle, lead: c.finalLead, cta: "Plan a journey \u2192", onClick: () => onNav("plan"), dark: true }));
 }
 

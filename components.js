@@ -76,7 +76,7 @@ function Reveal({ children, as = "div", className = "", style }) {
 }
 function Nav({ onNav, current }) {
   const [open, setOpen] = useState(false);
-  const links = [["journeys", "Journeys", "/journeys"], ["about", "About", "/about"], ["contact", "Contact", "/contact"]];
+  const links = [["journeys", "Journeys", "/journeys"], ["experiences", "Experiences", "/experiences"], ["about", "About", "/about"], ["contact", "Contact", "/contact"]];
   const go = (e, id) => { e.preventDefault(); onNav(id); setOpen(false); };
   return React.createElement("header", { className: "st-nav" },
     React.createElement("a", { className: "st-nav-brand", href: "/", onClick: e => go(e, "home") },
@@ -97,6 +97,7 @@ function Footer({ onNav }) {
       React.createElement("div", { className: "st-footer-cols" },
         React.createElement("div", null, React.createElement(Eyebrow, null, "Explore"),
           React.createElement("a", { href: "/journeys", onClick: e => { e.preventDefault(); onNav("journeys"); } }, "Journeys"),
+          React.createElement("a", { href: "/experiences", onClick: e => { e.preventDefault(); onNav("experiences"); } }, "Experiences"),
           React.createElement("a", { href: "/about", onClick: e => { e.preventDefault(); onNav("about"); } }, "About"),
           React.createElement("a", { href: "/contact", onClick: e => { e.preventDefault(); onNav("contact"); } }, "Contact")),
         React.createElement("div", null, React.createElement(Eyebrow, null, "Contact"),

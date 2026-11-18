@@ -8,6 +8,8 @@ function pathFor(view, id, season) {
   if (view === "journeys") return "/journeys" + q;
   if (view === "chapter") return "/" + id + q;
   if (view === "about") return "/about";
+  if (view === "experiences") return "/experiences" + (id ? "?experience=" + id : "");
+  if (view === "experience") return "/experiences/" + id;
   if (view === "contact") return "/contact";
   if (view === "legal") return "/legal-notice";
   if (view === "privacy") return "/privacy";
@@ -31,6 +33,8 @@ function parsePath(pathname, search) {
   const m = path.match(/^\/(?:journeys\/)?(explorer|boutique|signature)$/);
   if (m) return { view: "chapter", id: m[1], season: seasonFor("chapter", m[1], season) };
   if (path === "/about") return { view: "about" };
+  if (path === "/experiences") { const x = (sp.get("experience") || "").toLowerCase(); return { view: "experiences", id: EXPERIENCES.some(e => e.id === x) ? x : "" }; }
+  if (path === "/experiences/swiss-wine-cheese") return { view: "experience", id: "swiss-wine-cheese" };
   if (path === "/contact") return { view: "contact" };
   if (path === "/legal-notice") return { view: "legal" };
   if (path === "/privacy") return { view: "privacy" };
@@ -46,6 +50,8 @@ const META = {
   explorer: ["Explorer — Discover Switzerland through movement | Stimulus Trips", "Eight days from Lake Lucerne to the Lauterbrunnen valley, by rail, boat, e-bike and on foot. The route is fixed. The intensity is not.", "assets/chapter-explorer.jpg"],
   boutique: ["Boutique — Fewer places. More depth. | Stimulus Trips", "Eight days with two nights each in Appenzell, on Lake Lucerne and in Zermatt, and a last night in Zürich. Stay longer. Look closer.", "assets/hero-photo.jpg"],
   signature: ["Signature — A journey written with you | Stimulus Trips", "A Swiss journey designed entirely around your interests, your people and your reason for travelling.", "assets/journeys-signature.jpg"],
+  experiences: ["Day experiences in Zurich and beyond | Stimulus Trips", "One day, curated. Swiss wine and cheese, a chef's table, Lucerne and Rigi, Appenzell and more, shaped by people who know Switzerland from within.", "assets/signature-hero.jpg"],
+  experience: ["Swiss Wine & Cheese in Zurich | Stimulus Trips", "Three hours in Zurich's old town with a sommelier: five Swiss wines and the cheeses they belong with. Price and availability on request.", "assets/signature-hero.jpg"],
   about: ["About Stimulus — A network of people | Stimulus Trips", "We connect remarkable people to create remarkable journeys through Switzerland.", "assets/moment-oberalp.jpg"],
   contact: ["Contact | Stimulus Trips", "Talk to Stimulus Trips: hi@stimulustrips.com or WhatsApp +41 76 237 33 74.", "assets/signature-hero.jpg"],
   legal: ["Legal notice | Stimulus Trips", "Legal notice for stimulustrips.com: Stimulus Trips, sole proprietorship of Alejandro Ruiz Kissling, Zürich, Switzerland.", "assets/signature-hero.jpg"],
@@ -88,7 +94,7 @@ function App() {
     if (first.current) { first.current = false; window.pageview && window.pageview(); return; }
     window.pageview && window.pageview();
   }, [view, route.id]);
-  const current = view === "chapter" ? "journeys" : view;
+  const current = view === "chapter" ? "journeys" : view === "experience" ? "experiences" : view;
   return React.createElement("div", { className: "st-app", "data-scale": MAP.scale[t.scale] || "editorial" },
     React.createElement(Nav, { onNav: nav, current }),
     React.createElement("main", null,
@@ -97,12 +103,15 @@ function App() {
         onSeason: s => { setRoute({ view: "journeys", season: s }); window.history.replaceState({ view: "journeys", season: s }, "", pathFor("journeys", null, s)); } }),
       view === "chapter" && React.createElement(ChapterPage, { id: route.id, onNav: nav, season: route.season || "summer" }),
       view === "about" && React.createElement(AboutPage, { c: COPY, onNav: nav }),
+      view === "experiences" && React.createElement(ExperiencesPage, { onNav: nav, preset: route.id }),
+      view === "experience" && React.createElement(ExperienceDetailPage, { onNav: nav }),
       view === "contact" && React.createElement(ContactPage, { c: COPY, onNav: nav }),
       view === "legal" && React.createElement(LegalPage, { d: LEGAL.notice }),
       view === "privacy" && React.createElement(LegalPage, { d: LEGAL.privacy }),
       view === "plan" && React.createElement(PlanPage, { c: COPY, journey: route.id, season: route.season })),
     React.createElement(Footer, { onNav: nav }),
     React.createElement(WhatsAppFab, null),
+    React.createElement(ChefNotice, { view, onNav: nav }),
     React.createElement(TweaksPanel, { title: "Tweaks" },
       React.createElement(TweakSection, { label: "Typography" }),
       React.createElement(TweakRadio, { label: "Display scale", value: t.scale, options: ["Compact", "Editorial", "Grand"], onChange: v => setTweak("scale", v) })));
