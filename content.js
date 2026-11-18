@@ -172,7 +172,7 @@ const LEGAL = {
   privacy: {
     eyebrow: "Legal",
     title: "Privacy policy",
-    updated: "Last updated: 1 November 2026",
+    updated: "Last updated: 18 November 2026",
     blocks: [
       { p: ["This policy explains what personal data Stimulus Trips collects through this website, why, and what rights you have. It is based on the Swiss Federal Act on Data Protection (FADP)."] },
       { h: "1. Who is responsible" },
@@ -180,6 +180,10 @@ const LEGAL = {
       { h: "2. What we collect" },
       { sub: "When you send an enquiry (“Plan a Journey”)" },
       { p: ["The details you enter in the form: your name, email address, where you are travelling from, when you would like to travel and whether your dates are flexible, the number of travellers, the journey and season you are interested in, and your message.", "We use these details only to reply to you, to prepare a conversation and, if you wish, a proposal."] },
+      { sub: "When you request a day experience (\u201CPlan your day\u201D)" },
+      { p: ["The details you enter in the form: the experience you are interested in, your preferred date, the number of guests, your preferred language, where you are staying (if you tell us), your name, email address and your message.", "We use these details only to reply to you, to check availability and to prepare your day."] },
+      { sub: "When you join the Chef Series list" },
+      { p: ["Your email address. We use it only to tell you about the Chef Series. You can ask us to remove it at any time by writing to hi@stimulustrips.com."] },
       { sub: "When you write to us by email or WhatsApp" },
       { p: ["Your contact details and the content of your messages, for the same purpose."] },
       { sub: "When you visit the website" },
@@ -199,7 +203,7 @@ const LEGAL = {
       { h: "4. Data outside Switzerland" },
       { p: ["Some providers process data in the USA or the EU. Where the destination country does not offer an adequate level of data protection under Swiss law, we rely on recognised safeguards such as the Swiss–US Data Privacy Framework or standard contractual clauses."] },
       { h: "5. How long we keep your data" },
-      { p: ["We keep enquiries and correspondence for as long as needed to respond and to plan a possible journey. If no journey is booked, we delete them after 24 months. If you book a journey, we keep the related records as long as required by Swiss law (generally 10 years for accounting records)."] },
+      { p: ["We keep enquiries and correspondence for as long as needed to respond and to plan a possible journey or day experience. If nothing is booked, we delete them after 24 months. We keep Chef Series list emails until you ask us to remove them or the series ends. If you book a journey, we keep the related records as long as required by Swiss law (generally 10 years for accounting records)."] },
       { h: "6. Your rights" },
       { p: ["You can ask us at any time to tell you what data we hold about you, to correct it, to delete it, or to stop using it. Write to hi@stimulustrips.com. We will reply within 30 days.", "You may also contact the Swiss Federal Data Protection and Information Commissioner (FDPIC)."] },
       { h: "7. Changes" },
