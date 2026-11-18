@@ -148,7 +148,7 @@ const BOUTIQUE_CONTENT = {
       headline: "Pricing shaped around your journey",
       meta: "8 days \u00B7 7 nights",
       note: "Final pricing depends on travel dates, accommodation and the experiences we shape around you.",
-      cta: "Start a conversation \u2192"
+      cta: "Plan my Boutique journey \u2192"
     },
     final: {
       title: "Ready to discover Swiss winter differently?",

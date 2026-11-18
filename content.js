@@ -60,27 +60,24 @@ const JOURNEY_COMPARE = {
       quote: "\u201CWe don't adapt a journey to you. We write one with you.\u201D" }
   ],
   winter: [
-    { id: "explorer", name: "Explorer",
+    { id: "explorer", name: "Explorer", tag: "Sample journey \u00B7 Shaped with you",
       prop: "Discover Switzerland through winter movement.",
       route: "Zermatt \u00B7 7 nights",
       desc: ["One week beneath the Matterhorn, most of it on the snow, with the strongest days placed where the weather is best.",
         "Ski and snowboard are at the heart of the journey, with the intensity shaped around your level and the way you want to experience the mountains."],
-      quote: "\u201CThe journey is part of the destination.\u201D",
-      cta: "Discover Winter Explorer \u2192" },
-    { id: "boutique", name: "Boutique",
+      quote: "\u201CThe place is fixed. The intensity is not.\u201D" },
+    { id: "boutique", name: "Boutique", tag: "Sample journey \u00B7 Shaped with you",
       prop: "Discover Switzerland through its winter character.",
       route: "St. Moritz \u00B7 Zermatt",
       desc: ["Experience two of Switzerland's most distinctive Alpine worlds through their places, people, food, architecture and winter culture.",
         "A slower journey designed to understand what makes each place remarkable in winter."],
-      quote: "\u201CDiscover what gives a place its character.\u201D",
-      cta: "Discover Winter Boutique \u2192" },
-    { id: "signature", name: "Signature",
+      quote: "\u201CDiscover what gives a place its character.\u201D" },
+    { id: "signature", name: "Signature", tag: "Shaped with you",
       prop: "Winter, shaped entirely around you.",
       route: "Personal creation",
       desc: ["No fixed route. No predefined itinerary.",
         "We begin with your reason for travelling, your interests, your pace and the kind of winter you want to experience \u2014 then curate Switzerland around you."],
-      quote: "\u201CA journey that could only belong to you.\u201D",
-      cta: "Discover Winter Signature \u2192" }
+      quote: "\u201CWe don't adapt a journey to you. We write one with you.\u201D" }
   ]
 };
 /* WINTER — product paused (pilot only). Pick ONE mode; nothing else needs to change.
@@ -88,7 +85,7 @@ const JOURNEY_COMPARE = {
    "hidden"         = no Summer | Winter selector; every ?season=winter URL falls back to summer
    "on-request"     = selector stays; Winter shows one panel that leads to the form (season=winter)
    "signature-only" = selector stays; Winter shows only Signature; Explorer/Boutique are summer-only */
-const WINTER_MODE = "on-request";
+const WINTER_MODE = "current";
 const WINTER_ALT = {
   onRequest: { title: "Winter journeys on request",
     lead: "We don't publish a winter route. Tell us when you would like to travel and we'll shape a winter journey with you.",

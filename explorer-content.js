@@ -68,7 +68,7 @@ const EXPLORER_CONTENT = {
       title: "Discover Switzerland through winter movement.",
       lead: "Seven nights in Zermatt, most of them spent on the mountain. The days on snow follow the weather, the intensity follows you, and the rest of the week belongs to the village and the people who live beneath the Matterhorn.",
       meta: ["8 days \u00B7 7 nights", "Pricing shaped around your journey"],
-      cta: "Plan your Explorer journey \u2192",
+      cta: "Plan my Explorer journey \u2192",
       quote: "\u201CThe place is fixed. The intensity is not.\u201D"
     },
     idea: {
