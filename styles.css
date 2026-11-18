@@ -657,3 +657,135 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .st-jcol-tag { margin: 0; font-family: var(--font-sans); font-weight: 500; font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-2); }
 .st-exroute-req { margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--ink); }
 .st-shaped-line { color: var(--paper); }
+
+/* ===================================================================
+   DAY EXPERIENCES (Nov 2026) — /experiences, detail, home Chef Series, floating notice
+   Brand V2: cream / espresso / ink; lime = one primary action; square hairline cards, no shadows
+   =================================================================== */
+.ex-lbl { margin: 0; font-family: var(--font-sans); font-weight: 500; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; }
+.ex-fg2 { color: var(--fg-2); }
+.ex-on-dark-65 { color: rgba(246,241,232,0.65); }
+.ex-lime { color: var(--lime) !important; }
+.ex-d1 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.005em; font-size: clamp(3rem, 8vw, 6.4rem); line-height: 0.95; text-wrap: balance; }
+.ex-d2 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.02; text-wrap: balance; }
+.ex-d3 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.05; }
+.ex-d4 { margin: 0; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; letter-spacing: 0.005em; }
+.ex-voice { margin: 0; font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: 1.25rem; line-height: 1.3; }
+.ex-num { font-family: var(--font-display); font-weight: 700; font-size: 40px; line-height: 1; color: var(--copper); }
+.ex-ph { background: var(--paper-deep); color: var(--fg-2); display: flex; align-items: flex-end; padding: 16px; box-sizing: border-box; font-size: 13px; line-height: 1.4; }
+.ex-err { margin: 0; font-size: 13px; color: var(--camel, #CD8D5D); }
+
+/* Hero */
+.ex-hero { background: var(--espresso); color: var(--fg-on-dark); }
+.ex-hero-in { padding-top: clamp(80px, 10vw, 140px); padding-bottom: clamp(72px, 9vw, 120px); display: flex; flex-direction: column; gap: 26px; }
+.ex-hero .ex-d1 { max-width: 16ch; }
+.ex-hero-lead { margin: 0; font-size: 18px; line-height: 1.6; max-width: 56ch; color: rgba(246,241,232,0.88); }
+.ex-hero > .st-wrap > div:last-child { margin-top: 8px; }
+
+/* Grid */
+.ex-grid-sec { background: var(--paper); }
+.ex-grid-sec > .st-wrap { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(64px, 8vw, 104px); display: flex; flex-direction: column; gap: 48px; }
+.ex-grid-head { display: flex; flex-wrap: wrap; gap: 24px 64px; align-items: flex-end; justify-content: space-between; }
+.ex-grid-head > div { display: flex; flex-direction: column; gap: 16px; }
+.ex-grid-intro { margin: 0; font-size: 16px; line-height: 1.65; max-width: 44ch; color: var(--fg-2); }
+.ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 40px 24px; }
+.ex-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ex-card { display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--surface); min-width: 0; }
+.ex-card-ph { height: 240px; }
+.ex-card-body { padding: 22px 24px 28px; display: flex; flex-direction: column; gap: 12px; flex-grow: 1; }
+.ex-card-body .ex-lbl { color: var(--fg-2); }
+.ex-card-line { margin: 0; font-size: 16px; line-height: 1.65; flex-grow: 1; }
+.ex-card-meta { margin: 0; font-size: 14px; color: var(--fg-2); }
+.ex-card-link { align-self: flex-start; margin-top: 6px; }
+
+/* How it works */
+.ex-how { background: var(--paper-cool); border-top: 1px solid var(--line); }
+.ex-how > .st-wrap { padding-top: clamp(64px, 8vw, 104px); padding-bottom: clamp(64px, 8vw, 104px); display: flex; flex-direction: column; gap: 16px; }
+.ex-how-list { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.ex-how-list li { border-top: 1px solid var(--line-strong); padding-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+.ex-how-list p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--fg-2); }
+
+/* Request form (espresso) */
+.ex-plan { background: var(--espresso); color: var(--fg-on-dark); scroll-margin-top: 80px; }
+.ex-plan-in { padding-top: clamp(72px, 9vw, 120px); padding-bottom: clamp(72px, 9vw, 120px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 56px 80px; }
+.ex-plan-side { display: flex; flex-direction: column; gap: 18px; }
+.ex-plan-note { margin: 0; font-size: 16px; line-height: 1.65; color: rgba(246,241,232,0.88); max-width: 40ch; }
+.ex-plan-mail { color: var(--fg-on-dark); font-size: 14px; text-decoration: underline; text-underline-offset: 3px; }
+.ex-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 24px; align-content: start; }
+.ex-fld { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.ex-fld.is-wide, .ex-form .is-wide, .ex-form-foot { grid-column: 1 / -1; }
+.ex-fld label { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,241,232,0.65); }
+.ex-fld input, .ex-fld select, .ex-fld textarea, .ex-chef-form input { font-family: var(--font-sans); font-size: 16px; color: var(--fg-on-dark); background: rgba(246,241,232,0.06); border: 1px solid rgba(246,241,232,0.3); border-radius: 8px; padding: 12px 14px; min-height: 48px; box-sizing: border-box; width: 100%; }
+.ex-fld select option { color: var(--ink); }
+.ex-fld input::placeholder, .ex-fld textarea::placeholder, .ex-chef-form input::placeholder { color: rgba(246,241,232,0.5); }
+.ex-fld input:focus-visible, .ex-fld select:focus-visible, .ex-fld textarea:focus-visible, .ex-chef-form input:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+.ex-form-foot { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+.ex-consent { margin: 0; font-size: 13px; line-height: 1.55; color: rgba(246,241,232,0.75); max-width: 56ch; }
+.ex-consent a { color: var(--fg-on-dark); text-decoration: underline; text-underline-offset: 2px; }
+.ex-sent { display: flex; flex-direction: column; gap: 14px; align-self: start; border-top: 1px solid rgba(246,241,232,0.3); padding-top: 24px; }
+.ex-sent p { margin: 0; color: rgba(246,241,232,0.88); line-height: 1.65; max-width: 52ch; }
+
+/* Detail */
+.ex-detail-ph { height: clamp(320px, 42vw, 560px); }
+.ex-detail { background: var(--paper); }
+.ex-detail-in { padding-top: clamp(56px, 6vw, 80px); padding-bottom: clamp(72px, 9vw, 104px); display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 64px 96px; }
+.ex-detail-main { display: flex; flex-direction: column; gap: 24px; }
+.ex-crumb { text-decoration: none; }
+.ex-crumb:hover { color: var(--ink); }
+.ex-detail-title { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 0.98; }
+.ex-detail-lead { margin: 0; font-size: 18px; line-height: 1.6; max-width: 56ch; }
+.ex-day-h { margin-top: 24px; }
+.ex-day { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
+.ex-day li { display: flex; gap: 28px; padding: 24px 0; border-top: 1px solid var(--line); }
+.ex-day .ex-num { font-size: 32px; flex: 0 0 52px; }
+.ex-day p { margin: 0; font-size: 16px; line-height: 1.65; }
+.ex-voice-lg { margin-top: 16px; font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.15; }
+.ex-facts { align-self: start; border: 1px solid var(--line); background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 22px; }
+.ex-facts dl { margin: 0; border-bottom: 1px solid var(--line); }
+.ex-fact { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 8px 20px; padding: 14px 0; border-top: 1px solid var(--line); }
+.ex-fact dt { font-size: 12px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-2); padding-top: 3px; }
+.ex-fact dd { margin: 0; font-size: 16px; line-height: 1.6; }
+.ex-facts-note { margin: 0; font-size: 14px; line-height: 1.5; color: var(--fg-2); }
+.ex-others { background: var(--paper-cool); border-top: 1px solid var(--line); }
+.ex-others > .st-wrap { padding-top: clamp(64px, 8vw, 88px); padding-bottom: clamp(64px, 8vw, 88px); display: flex; flex-direction: column; gap: 40px; }
+.ex-others .ex-card-ph { height: 200px; }
+
+/* Home: The Chef Series */
+.ex-chef { background: var(--espresso); color: var(--fg-on-dark); scroll-margin-top: 80px; border-bottom: 1px solid rgba(246,241,232,0.12); }
+.ex-chef-in { padding-top: clamp(72px, 10vw, 120px); padding-bottom: clamp(72px, 10vw, 120px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px 80px; align-items: center; }
+.ex-chef-ph { min-height: 520px; background: #5A4231; color: rgba(246,241,232,0.88); }
+.ex-chef-body { display: flex; flex-direction: column; gap: 22px; }
+.ex-chef-lead { margin: 0; font-size: 18px; line-height: 1.6; max-width: 48ch; color: rgba(246,241,232,0.88); }
+.ex-chef-meta { margin: 0; font-size: 14px; line-height: 1.5; color: rgba(246,241,232,0.88); }
+.ex-chef-form { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.ex-chef-form .is-wide, .ex-chef-label { flex-basis: 100%; }
+.ex-chef-form input { flex: 1 1 240px; width: auto; border-radius: 999px; padding: 12px 20px; }
+.ex-btn-outline { min-height: 48px; border: 1px solid var(--fg-on-dark); background: transparent; color: var(--fg-on-dark); border-radius: 999px; padding: 12px 24px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: background 180ms ease, color 180ms ease; }
+.ex-btn-outline:hover { background: var(--fg-on-dark); color: var(--ink); }
+.ex-btn-outline:focus-visible, .ex-notice-close:focus-visible, .ex-notice-link:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+
+/* Floating notice (no lime; sits above the WhatsApp button) */
+.ex-notice { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: calc(88px + env(safe-area-inset-bottom)); z-index: 54; width: 340px; max-width: calc(100vw - 32px); box-sizing: border-box; background: var(--espresso); color: var(--fg-on-dark); padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; border: 1px solid rgba(246,241,232,0.12); animation: ex-notice-in 280ms ease-out both; }
+@keyframes ex-notice-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ex-notice { animation: none; } }
+.ex-notice-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.ex-notice-close { width: 44px; height: 44px; margin: -14px -14px 0 0; border: 0; background: transparent; color: var(--fg-on-dark); cursor: pointer; display: grid; place-items: center; }
+.ex-notice-title { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 1.05; text-transform: uppercase; }
+.ex-notice-text { margin: 0; font-size: 14px; line-height: 1.5; color: rgba(246,241,232,0.88); }
+.ex-notice-link { align-self: flex-start; margin-top: 4px; color: var(--fg-on-dark); font-size: 13px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; border-bottom: 1px solid rgba(246,241,232,0.5); padding-bottom: 3px; }
+
+@media (max-width: 960px) {
+  .ex-plan-in, .ex-detail-in, .ex-chef-in { grid-template-columns: minmax(0, 1fr); }
+  .ex-chef-ph { min-height: 360px; }
+  .ex-how-list, .ex-grid-3 { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+@media (max-width: 560px) {
+  .st-wrap.ex-hero-in, .ex-grid-sec > .st-wrap { padding-left: 22px; padding-right: 22px; }
+  .ex-grid { grid-template-columns: minmax(0, 1fr); }
+  .ex-form { grid-template-columns: minmax(0, 1fr); }
+  .ex-fact { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .ex-facts { padding: 24px; }
+  .ex-notice { left: 16px; right: 16px; width: auto; max-width: none; bottom: calc(84px + env(safe-area-inset-bottom)); padding: 16px 18px; gap: 6px; }
+  .ex-notice-text { display: none; }
+  .ex-notice-title { font-size: 20px; }
+}
